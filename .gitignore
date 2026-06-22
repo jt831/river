@@ -1,0 +1,26 @@
+# Godot generated data
+.godot/
+/.import/
+/.mono/
+/android/
+
+# Local automation and editor settings
+/.agents/
+/.codex/
+/.idea/
+/.vscode/
+
+# Exported builds and logs
+/build/
+/dist/
+/exports/
+/logs/
+*.log
+
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.swp
+*~

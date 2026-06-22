@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://md28xq2rbbqa"]
+
+[ext_resource type="Script" uid="uid://1a7gqsh481ak" path="res://scripts/WaterBody.gd" id="1_wbody"]
+[ext_resource type="Script" path="res://scripts/Grabbable.gd" id="2_grabbable"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2mpej"]
+radius = 0.5331143
+
+[sub_resource type="SphereMesh" id="SphereMesh_2mpej"]
+
+[node name="Node3D" type="Node3D" unique_id=738989849]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=914355949]
+mass = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=86465373]
+shape = SubResource("SphereShape3D_2mpej")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=2090589961]
+mesh = SubResource("SphereMesh_2mpej")
+
+[node name="WaterBody" type="Node" parent="RigidBody3D" unique_id=782381844]
+script = ExtResource("1_wbody")
+
+[node name="Grabbable" type="Node" parent="RigidBody3D" unique_id=2222222222]
+script = ExtResource("2_grabbable")
+

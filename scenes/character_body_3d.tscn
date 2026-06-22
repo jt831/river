@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://6kgvev3hlbfd"]
+
+[ext_resource type="Script" uid="uid://cp1pm1aqgqjv3" path="res://scripts/PlayerController.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/GrabThrowController.gd" id="2_grabthrow"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bu0v1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o7tup"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_trajectory"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_landing"]
+inner_radius = 0.78
+outer_radius = 1.0
+rings = 32
+ring_segments = 16
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1412336941]
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467062553]
+shape = SubResource("CapsuleShape3D_bu0v1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=896000393]
+mesh = SubResource("CapsuleMesh_o7tup")
+
+[node name="GrabThrowController" type="Node3D" parent="." unique_id=1111111111]
+script = ExtResource("2_grabthrow")
+
+[node name="CarryPivot" type="Marker3D" parent="GrabThrowController"]
+position = Vector3(0, 1.25, -1.15)
+
+[node name="TrajectoryLine" type="MeshInstance3D" parent="GrabThrowController"]
+top_level = true
+mesh = SubResource("ImmediateMesh_trajectory")
+
+[node name="LandingIndicator" type="MeshInstance3D" parent="GrabThrowController"]
+top_level = true
+mesh = SubResource("TorusMesh_landing")
