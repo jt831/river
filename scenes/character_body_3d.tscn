@@ -16,6 +16,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cthcg"]
+radius = 0.3
 height = 1.3051758
 
 [sub_resource type="TorusMesh" id="TorusMesh_position_indicator"]
@@ -41,7 +42,7 @@ transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0
 libraries/ = SubResource("AnimationLibrary_cthcg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1567513501]
-transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62760913, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62760913, 0)
 shape = SubResource("CapsuleShape3D_cthcg")
 
 [node name="PlayerPositionIndicator" type="Node3D" parent="." unique_id=1051557763]

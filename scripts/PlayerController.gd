@@ -22,6 +22,13 @@ extends CharacterBody3D
 @export var water_vertical_damping: float = 4.0
 ## 旋转速度（平滑转向）
 @export var rotation_speed: float = 12.0
+@export_group("Physical Impulses")
+@export var player_physics_mass: float = 1.0
+@export var contact_impulse_scale: float = 1.0
+@export var max_contact_mass_ratio: float = 4.0
+@export var min_impulse_contact_speed: float = 1.0
+@export var max_external_speed: float = 18.0
+@export var external_velocity_damping: float = 4.5
 
 
 # ──────────── 内部状态 ────────────
@@ -45,6 +52,8 @@ var _water_flow: Vector3 = Vector3.ZERO
 var _water_surface_y: float = 0.0
 ## 当前水体区域引用
 var _water_area: Node = null
+var _external_velocity: Vector3 = Vector3.ZERO
+var _applied_external_velocity: Vector3 = Vector3.ZERO
 
 # ━━━━━━━━━━━━━━━━━━━━━━ 水体通知接口 ━━━━━━━━━━━━━━━━━━━━━━
 
@@ -65,6 +74,15 @@ func exit_water() -> void:
 func is_in_water() -> bool:
 	return _in_water
 
+
+func apply_physics_impulse(impulse: Vector3, source_mass: float = 1.0) -> void:
+	if impulse.length_squared() <= 0.0001:
+		return
+
+	var safe_player_mass := maxf(player_physics_mass, 0.001)
+	var mass_ratio := clampf(source_mass / safe_player_mass, 0.0, max_contact_mass_ratio)
+	_add_external_velocity(impulse / safe_player_mass * mass_ratio * contact_impulse_scale)
+
 # ━━━━━━━━━━━━━━━━━━━━━━ 物理帧 ━━━━━━━━━━━━━━━━━━━━━━
 
 func _physics_process(delta: float) -> void:
@@ -72,6 +90,8 @@ func _physics_process(delta: float) -> void:
 		_process_water_movement(delta)
 	else:
 		_process_land_movement(delta)
+
+	_apply_external_velocity()
 
 	# ── 转向逻辑 ──
 	# 根据水平速度方向进行平滑旋转
@@ -83,6 +103,9 @@ func _physics_process(delta: float) -> void:
 		global_transform.basis = global_transform.basis.slerp(target_basis, rotation_speed * delta).orthonormalized()
 
 	move_and_slide()
+	_transfer_contact_impulses()
+	_restore_control_velocity()
+	_damp_external_velocity(delta)
 	_update_animation_state(has_land_input)
 
 
@@ -161,6 +184,72 @@ func _process_water_movement(delta: float) -> void:
 	# （不处理跳跃输入即可）
 
 ## 获取玩家当前的朝向向量 (3D)
+func _apply_external_velocity() -> void:
+	_applied_external_velocity = _external_velocity
+	velocity += _applied_external_velocity
+
+
+func _restore_control_velocity() -> void:
+	velocity -= _applied_external_velocity
+	_applied_external_velocity = Vector3.ZERO
+
+
+func _damp_external_velocity(delta: float) -> void:
+	var damping := maxf(external_velocity_damping, 0.0)
+	if damping <= 0.0:
+		return
+	_external_velocity = _external_velocity.move_toward(Vector3.ZERO, damping * delta)
+
+
+func _transfer_contact_impulses() -> void:
+	for index in range(get_slide_collision_count()):
+		var collision := get_slide_collision(index)
+		var collider := collision.get_collider()
+		if collider is RigidBody3D:
+			var body := collider as RigidBody3D
+			var contact_point := collision.get_position()
+			var contact_offset := contact_point - body.global_position
+			var surface_velocity := body.linear_velocity + body.angular_velocity.cross(contact_offset)
+			if surface_velocity.length() < min_impulse_contact_speed:
+				continue
+
+			var safe_player_mass := maxf(player_physics_mass, 0.001)
+			var mass_influence := clampf(body.mass / safe_player_mass, 0.0, 1.0)
+			_inherit_external_velocity(surface_velocity * mass_influence * contact_impulse_scale)
+		else:
+			var collider_velocity := collision.get_collider_velocity()
+			if collider_velocity.length() < min_impulse_contact_speed:
+				continue
+			_inherit_external_velocity(collider_velocity * contact_impulse_scale)
+
+
+func _inherit_external_velocity(target_velocity: Vector3) -> void:
+	if target_velocity.length_squared() <= 0.0001:
+		return
+
+	var target_direction := target_velocity.normalized()
+	var current_speed := _external_velocity.dot(target_direction)
+	var target_speed := target_velocity.length()
+	if current_speed >= target_speed:
+		return
+
+	_external_velocity += target_direction * (target_speed - current_speed)
+	_clamp_external_velocity()
+
+
+func _add_external_velocity(delta_velocity: Vector3) -> void:
+	if delta_velocity.length_squared() <= 0.0001:
+		return
+
+	_external_velocity += delta_velocity
+	_clamp_external_velocity()
+
+
+func _clamp_external_velocity() -> void:
+	if _external_velocity.length() > max_external_speed:
+		_external_velocity = _external_velocity.normalized() * max_external_speed
+
+
 func get_facing_direction() -> Vector3:
 	return -global_transform.basis.z.normalized()
 

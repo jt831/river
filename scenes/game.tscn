@@ -47,7 +47,7 @@ resource_local_to_scene = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_clear_trigger"]
 resource_local_to_scene = true
-size = Vector3(1, 0.366333, 0.99797606)
+size = Vector3(1, 0.366333, 0.95062256)
 
 [node name="Game" type="Node3D" unique_id=1373608376]
 
@@ -74,7 +74,7 @@ flow_speed = 6.0
 transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 1, 0.49827024, 0.50238216, 0)
 
 [node name="DamGate" type="AnimatableBody3D" parent="Env/Node3D" unique_id=1827764410]
-transform = Transform3D(-4.687528e-07, 0, 0.28, 0, 1.7819663, 0, -10.723813, 0, -1.2239188e-08, -9.8500185, 0.8086046, -2.90664)
+transform = Transform3D(-4.6875277e-07, 0, 0.52556133, 0, 1.7819663, 0, -10.723812, 0, -2.2973014e-08, -9.740699, 0.8086046, -2.90664)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/DamGate" unique_id=874224103]
 shape = SubResource("BoxShape3D_gate")
@@ -84,10 +84,10 @@ material_override = SubResource("StandardMaterial3D_gate")
 mesh = SubResource("BoxMesh_gate")
 
 [node name="SwitchPanel" type="Node3D" parent="Env/Node3D" unique_id=2082934111]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.9906654, 3.6199994, 4.1529126)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.9906654, 3.776517, 4.1529126)
 
 [node name="Panel" type="StaticBody3D" parent="Env/Node3D/SwitchPanel" unique_id=1054044933]
-transform = Transform3D(1.15, 0, 0, 0, 1.35, 0, 0, 0, 0.18, 0, 0.35, 0)
+transform = Transform3D(1.15, 0, 0, 0, 1.5, 0, 0, 0, 0.18, 0, 0.3499999, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/SwitchPanel/Panel" unique_id=1960842245]
 shape = SubResource("BoxShape3D_panel")
@@ -140,7 +140,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.54)
 script = ExtResource("3_p57ef")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/clearRange/PlayerClearTrigger" unique_id=1743886657]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4775033, -0.53770375)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4775033, -0.5194237)
 shape = SubResource("BoxShape3D_clear_trigger")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/clearRange" unique_id=210975470]
@@ -155,6 +155,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9657132, 0.2596113, 0, -0.2596113, 0.96571
 
 [node name="player" parent="." unique_id=1412336941 instance=ExtResource("3_lnu2h")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -7.274645, 4.4845533, 6.7913027)
+contact_impulse_scale = 5.0
 
 [node name="DebugUI" type="CanvasLayer" parent="." unique_id=1458204946]
 
