@@ -52,6 +52,10 @@ func exit_water() -> void:
 	_water_area = null
 	_water_flow = Vector3.ZERO
 
+
+func is_in_water() -> bool:
+	return _in_water
+
 # ━━━━━━━━━━━━━━━━━━━━━━ 物理帧 ━━━━━━━━━━━━━━━━━━━━━━
 
 func _physics_process(delta: float) -> void:
@@ -63,7 +67,8 @@ func _physics_process(delta: float) -> void:
 	# ── 转向逻辑 ──
 	# 根据水平速度方向进行平滑旋转
 	var horiz_vel = Vector3(velocity.x, 0.0, velocity.z)
-	if horiz_vel.length_squared() > 0.01:
+	var has_land_input := Input.get_vector("left", "right", "up", "down") != Vector2.ZERO
+	if horiz_vel.length_squared() > 0.01 and (_in_water or has_land_input):
 		var target_dir = horiz_vel.normalized()
 		var target_basis = Basis.looking_at(target_dir, Vector3.UP)
 		global_transform.basis = global_transform.basis.slerp(target_basis, rotation_speed * delta).orthonormalized()
@@ -84,14 +89,16 @@ func _process_land_movement(delta: float) -> void:
 
 	# XZ 平面移动
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := Vector3(input_dir.x, 0, input_dir.y).normalized()
+	var direction := _get_camera_relative_direction(input_dir)
 
 	if direction != Vector3.ZERO:
 		velocity.x = direction.x * move_speed
 		velocity.z = direction.z * move_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, move_speed * delta * 10.0)
-		velocity.z = move_toward(velocity.z, 0.0, move_speed * delta * 10.0)
+		var horizontal_velocity := Vector2(velocity.x, velocity.z)
+		horizontal_velocity = horizontal_velocity.move_toward(Vector2.ZERO, move_speed * delta * 10.0)
+		velocity.x = horizontal_velocity.x
+		velocity.z = horizontal_velocity.y
 
 # ━━━━━━━━━━━━━━━━━━━━━━ 水中移动 ━━━━━━━━━━━━━━━━━━━━━━
 
@@ -133,8 +140,8 @@ func _process_water_movement(delta: float) -> void:
 	else:
 		perp_dir = Vector3(0, 0, 1)
 
-	# input_dir.y 对应 W/S（前后），映射到垂直于水流的方向
-	var perp_input: float = input_dir.y  # W 为负 y，对应正方向
+	# 将相机相对移动方向投影到垂直于水流的可控方向
+	var perp_input: float = _get_camera_relative_direction(input_dir).dot(perp_dir)
 	var perp_velocity: float = perp_input * swim_speed
 
 	# 移除原有的 perp 分量，替换为玩家输入
@@ -146,3 +153,24 @@ func _process_water_movement(delta: float) -> void:
 ## 获取玩家当前的朝向向量 (3D)
 func get_facing_direction() -> Vector3:
 	return -global_transform.basis.z.normalized()
+
+
+func _get_camera_relative_direction(input_dir: Vector2) -> Vector3:
+	if input_dir == Vector2.ZERO:
+		return Vector3.ZERO
+
+	var camera := get_viewport().get_camera_3d()
+	if camera == null:
+		return Vector3(input_dir.x, 0.0, input_dir.y).normalized()
+
+	var camera_forward := -camera.global_transform.basis.z
+	camera_forward.y = 0.0
+	var camera_right := camera.global_transform.basis.x
+	camera_right.y = 0.0
+
+	if camera_forward.is_zero_approx() or camera_right.is_zero_approx():
+		return Vector3(input_dir.x, 0.0, input_dir.y).normalized()
+
+	camera_forward = camera_forward.normalized()
+	camera_right = camera_right.normalized()
+	return (camera_right * input_dir.x - camera_forward * input_dir.y).normalized()

@@ -1,5 +1,17 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://3y38nvsyngex"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bvcq1ay28w8hk"]
+
+[ext_resource type="Shader" uid="uid://cp4mfttw8dqnk" path="res://assets/shaders/stylized_river_water.gdshader" id="1_i0nss"]
 
 [resource]
-transparency = 1
-albedo_color = Color(0, 0.80929834, 0.83770585, 0.2784314)
+render_priority = 0
+shader = ExtResource("1_i0nss")
+shader_parameter/water_color = Color(0.45, 0.67, 0.92, 0.56)
+shader_parameter/ripple_color = Color(0.76, 0.88, 1, 0.34)
+shader_parameter/edge_color = Color(0.82, 0.93, 1, 0.28)
+shader_parameter/alpha = 0.6999999843536
+shader_parameter/flow_direction = Vector2(0, 1)
+shader_parameter/flow_speed = 0.35
+shader_parameter/wave_scale = 0.1299999989569
+shader_parameter/wave_strength = 0.26999999396496
+shader_parameter/stripe_softness = 0.43999999016512004
+shader_parameter/surface_lift = 0.018

@@ -1,39 +1,58 @@
 [gd_scene format=3 uid="uid://6kgvev3hlbfd"]
 
 [ext_resource type="Script" uid="uid://cp1pm1aqgqjv3" path="res://scripts/PlayerController.gd" id="1_player"]
-[ext_resource type="Script" path="res://scripts/GrabThrowController.gd" id="2_grabthrow"]
+[ext_resource type="Script" uid="uid://dslj65s6bfk2e" path="res://scripts/GrabThrowController.gd" id="2_grabthrow"]
+[ext_resource type="Script" uid="uid://vhiedbrio7x5" path="res://scripts/PlayerPositionIndicator.gd" id="3_position_indicator"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bu0v1"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o7tup"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_o7tup"]
+[sub_resource type="PrismMesh" id="PrismMesh_o7tup"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_position_indicator"]
+outer_radius = 0.6
+rings = 48
+ring_segments = 12
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_trajectory"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_landing"]
 inner_radius = 0.78
-outer_radius = 1.0
 rings = 32
 ring_segments = 16
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1412336941]
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1412336941 groups=["player"]]
 script = ExtResource("1_player")
+move_speed = 4.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467062553]
-shape = SubResource("CapsuleShape3D_bu0v1")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1567513501]
+transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_o7tup")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=896000393]
-mesh = SubResource("CapsuleMesh_o7tup")
+transform = Transform3D(0.6, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_o7tup")
+
+[node name="PlayerPositionIndicator" type="Node3D" parent="." unique_id=1051557763]
+top_level = true
+script = ExtResource("3_position_indicator")
+indicator_color = Color(0.93351305, 0.12356057, 0.1259259, 0.9019608)
+ring_width = 0.05
+
+[node name="MarkerMesh" type="MeshInstance3D" parent="PlayerPositionIndicator" unique_id=52183308]
+cast_shadow = 0
+mesh = SubResource("TorusMesh_position_indicator")
 
 [node name="GrabThrowController" type="Node3D" parent="." unique_id=1111111111]
+visible = false
 script = ExtResource("2_grabthrow")
 
-[node name="CarryPivot" type="Marker3D" parent="GrabThrowController"]
-position = Vector3(0, 1.25, -1.15)
+[node name="CarryPivot" type="Marker3D" parent="GrabThrowController" unique_id=1089757519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -1.15)
 
-[node name="TrajectoryLine" type="MeshInstance3D" parent="GrabThrowController"]
+[node name="TrajectoryLine" type="MeshInstance3D" parent="GrabThrowController" unique_id=1680899614]
 top_level = true
 mesh = SubResource("ImmediateMesh_trajectory")
 
-[node name="LandingIndicator" type="MeshInstance3D" parent="GrabThrowController"]
+[node name="LandingIndicator" type="MeshInstance3D" parent="GrabThrowController" unique_id=178477090]
 top_level = true
 mesh = SubResource("TorusMesh_landing")

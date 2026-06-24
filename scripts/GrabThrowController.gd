@@ -45,6 +45,9 @@ void fragment() {
 
 
 func _ready() -> void:
+	# The controller owns the trajectory meshes, so hiding this node also hides
+	# both preview children even when their own visible flags are enabled.
+	visible = true
 	trajectory_line.global_transform = Transform3D.IDENTITY
 	_setup_visuals()
 
@@ -160,6 +163,7 @@ func _grab_object(body: RigidBody3D) -> void:
 	_held_object.linear_velocity = Vector3.ZERO
 	_held_object.angular_velocity = Vector3.ZERO
 	_held_object.freeze = true
+	_held_object.rotation = Vector3.ZERO
 	_held_object.add_collision_exception_with(_player)
 
 
@@ -174,7 +178,6 @@ func _carry_held_object(delta: float) -> void:
 		target_position = obstruction.position + obstruction.normal * 0.25
 	var weight := clampf(carry_lerp_speed * delta, 0.0, 1.0)
 	_held_object.global_position = _held_object.global_position.lerp(target_position, weight)
-	_held_object.global_basis = _held_object.global_basis.slerp(carry_pivot.global_basis, weight)
 
 
 func _throw_held_object() -> void:

@@ -23,6 +23,8 @@ extends Area3D
 ## 记录当前在水中的 RigidBody3D 及其入水瞬间速度
 ## key = RigidBody3D, value = { "entry_velocity": Vector3 }
 var _rigid_bodies: Dictionary = {}
+var _is_drained: bool = false
+var _drain_tween: Tween
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -35,6 +37,9 @@ func _ready() -> void:
 # ━━━━━━━━━━━━━━━━━━━━━━ 物理帧 ━━━━━━━━━━━━━━━━━━━━━━
 
 func _physics_process(delta: float) -> void:
+	if _is_drained:
+		return
+
 	# 水面 Y 坐标 = 这个 Area3D 碰撞体的顶部
 	var water_surface_y: float = _get_water_surface_y()
 
@@ -106,6 +111,9 @@ func _apply_water_physics_to_rigid(body: RigidBody3D, surface_y: float, delta: f
 # ━━━━━━━━━━━━━━━━━━━━━━ 信号回调 ━━━━━━━━━━━━━━━━━━━━━━
 
 func _on_body_entered(body: Node3D) -> void:
+	if _is_drained:
+		return
+
 	if body is RigidBody3D:
 		_rigid_bodies[body] = {
 			"entry_velocity": body.linear_velocity.length()
@@ -120,6 +128,56 @@ func _on_body_exited(body: Node3D) -> void:
 	# 通知玩家离开水中
 	if body.has_method("exit_water"):
 		body.exit_water()
+
+
+func drain(duration: float = 1.8, drain_depth: float = 1.25) -> void:
+	if _is_drained:
+		return
+
+	_is_drained = true
+	flow_speed = 0.0
+	_rigid_bodies.clear()
+	_notify_water_exit_for_overlapping_bodies()
+	_disable_dead_zones(self)
+
+	if _drain_tween:
+		_drain_tween.kill()
+
+	_drain_tween = create_tween()
+	_drain_tween.set_parallel(true)
+	_drain_tween.set_trans(Tween.TRANS_SINE)
+	_drain_tween.set_ease(Tween.EASE_IN_OUT)
+
+	var target_offset := Vector3.DOWN * drain_depth
+	for child in get_children():
+		if child is MeshInstance3D or child is CollisionShape3D:
+			_drain_tween.tween_property(child, "position", child.position + target_offset, duration)
+
+	_drain_tween.finished.connect(_finish_drain)
+
+
+func _finish_drain() -> void:
+	monitoring = false
+	monitorable = false
+	for child in get_children():
+		if child is CollisionShape3D:
+			child.disabled = true
+
+
+func _notify_water_exit_for_overlapping_bodies() -> void:
+	for body in get_overlapping_bodies():
+		if body.has_method("exit_water"):
+			body.exit_water()
+
+
+func _disable_dead_zones(root: Node) -> void:
+	for child in root.get_children():
+		if child is Area3D and child != self:
+			child.monitoring = false
+			child.monitorable = false
+		if child is CollisionShape3D:
+			child.disabled = true
+		_disable_dead_zones(child)
 
 # ━━━━━━━━━━━━━━━━━━━━━━ 辅助函数 ━━━━━━━━━━━━━━━━━━━━━━
 
