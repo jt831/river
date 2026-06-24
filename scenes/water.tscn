@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dabn24tm6lcty"]
 
-[ext_resource type="Material" uid="uid://bvcq1ay28w8hk" path="res://assets/water.tres" id="2_s3811"]
+[ext_resource type="Material" uid="uid://bvcq1ay28w8hk" path="res://assets/materials/water.tres" id="2_s3811"]
 [ext_resource type="Script" uid="uid://8s85yy33kqqx" path="res://scripts/WaterArea.gd" id="3_water"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bdk6y"]

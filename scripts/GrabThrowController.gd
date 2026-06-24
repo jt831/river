@@ -16,6 +16,7 @@ class_name GrabThrowController
 @export var trajectory_width: float = 0.15
 @export var landing_indicator_color := Color(0.15, 0.85, 1.0, 0.9)
 @export var landing_indicator_radius: float = 0.6
+@export var outline_edge_thickness: float = 0.035
 
 @onready var carry_pivot: Marker3D = $CarryPivot
 @onready var trajectory_line: MeshInstance3D = $TrajectoryLine
@@ -25,23 +26,9 @@ class_name GrabThrowController
 var _held_object: RigidBody3D
 var _hovered_object: RigidBody3D
 var _throw_velocity := Vector3.ZERO
-var _outline_original_materials: Dictionary = {}
-var _green_outline: ShaderMaterial
-var _red_outline: ShaderMaterial
-
-const OUTLINE_SHADER := """
-shader_type spatial;
-render_mode cull_front, unshaded;
-uniform vec4 outline_color : source_color = vec4(1.0);
-uniform float outline_thickness = 0.05;
-void vertex() {
-	VERTEX += NORMAL * outline_thickness;
-}
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	ALPHA = outline_color.a;
-}
-"""
+var _outline_proxies: Array[MeshInstance3D] = []
+var _green_outline: StandardMaterial3D
+var _red_outline: StandardMaterial3D
 
 
 func _ready() -> void:
@@ -75,14 +62,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _setup_visuals() -> void:
-	var outline_shader := Shader.new()
-	outline_shader.code = OUTLINE_SHADER
-	_green_outline = ShaderMaterial.new()
-	_green_outline.shader = outline_shader
-	_green_outline.set_shader_parameter("outline_color", Color(0.1, 1.0, 0.2, 0.95))
-	_red_outline = ShaderMaterial.new()
-	_red_outline.shader = outline_shader
-	_red_outline.set_shader_parameter("outline_color", Color(1.0, 0.1, 0.1, 0.95))
+	_green_outline = _create_outline_material(Color(0.1, 1.0, 0.2, 0.95))
+	_red_outline = _create_outline_material(Color(1.0, 0.1, 0.1, 0.95))
 
 	var line_material := StandardMaterial3D.new()
 	line_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -99,6 +80,15 @@ func _setup_visuals() -> void:
 	landing_indicator.material_override = indicator_material
 	trajectory_line.visible = false
 	landing_indicator.visible = false
+
+
+func _create_outline_material(color: Color) -> StandardMaterial3D:
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	material.albedo_color = color
+	return material
 
 
 func _update_hover() -> void:
@@ -134,18 +124,94 @@ func _is_in_grab_range(body: RigidBody3D) -> bool:
 
 func _apply_outline(body: Node, in_range: bool) -> void:
 	var outline := _green_outline if in_range else _red_outline
-	for mesh in _find_meshes(body):
-		if not _outline_original_materials.has(mesh):
-			_outline_original_materials[mesh] = mesh.material_overlay
-		mesh.material_overlay = outline
+	if _outline_proxies.is_empty() and body is Node3D:
+		_create_outline_proxies(body)
+	for proxy in _outline_proxies:
+		if is_instance_valid(proxy):
+			proxy.material_override = outline
 
 
 func _clear_hover() -> void:
-	for mesh in _outline_original_materials:
-		if is_instance_valid(mesh):
-			mesh.material_overlay = _outline_original_materials[mesh]
-	_outline_original_materials.clear()
+	for proxy in _outline_proxies:
+		if is_instance_valid(proxy):
+			proxy.queue_free()
+	_outline_proxies.clear()
 	_hovered_object = null
+
+
+func _create_outline_proxies(body: Node3D) -> void:
+	for collision_shape in _find_collision_shapes(body):
+		if collision_shape.shape is BoxShape3D:
+			var box_shape := collision_shape.shape as BoxShape3D
+			var local_transform := body.global_transform.affine_inverse() * collision_shape.global_transform
+			_create_box_outline_proxy(body, local_transform, box_shape.size)
+	if _outline_proxies.is_empty():
+		_create_visual_bounds_outline_proxy(body)
+
+
+func _create_box_outline_proxy(body: Node3D, local_transform: Transform3D, size: Vector3) -> void:
+	var half_size := size * 0.5
+	var thickness := minf(outline_edge_thickness, minf(size.x, minf(size.y, size.z)) * 0.45)
+	if thickness <= 0.0:
+		return
+	for y in [-half_size.y, half_size.y]:
+		for z in [-half_size.z, half_size.z]:
+			_create_outline_edge(body, local_transform, Vector3(size.x, thickness, thickness), Vector3(0.0, y, z))
+	for x in [-half_size.x, half_size.x]:
+		for z in [-half_size.z, half_size.z]:
+			_create_outline_edge(body, local_transform, Vector3(thickness, size.y, thickness), Vector3(x, 0.0, z))
+	for x in [-half_size.x, half_size.x]:
+		for y in [-half_size.y, half_size.y]:
+			_create_outline_edge(body, local_transform, Vector3(thickness, thickness, size.z), Vector3(x, y, 0.0))
+
+
+func _create_outline_edge(body: Node3D, box_transform: Transform3D, edge_size: Vector3, edge_offset: Vector3) -> void:
+	var box_mesh := BoxMesh.new()
+	box_mesh.size = edge_size
+	var proxy := MeshInstance3D.new()
+	proxy.name = "GrabOutlineProxy"
+	proxy.mesh = box_mesh
+	proxy.transform = box_transform * Transform3D(Basis.IDENTITY, edge_offset)
+	proxy.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	proxy.extra_cull_margin = 1.0
+	body.add_child(proxy)
+	_outline_proxies.append(proxy)
+
+
+func _create_visual_bounds_outline_proxy(body: Node3D) -> void:
+	var has_bounds := false
+	var bounds := AABB()
+	for mesh in _find_meshes(body):
+		var mesh_bounds := mesh.get_aabb()
+		var mesh_to_body := body.global_transform.affine_inverse() * mesh.global_transform
+		var body_bounds := _transform_aabb(mesh_to_body, mesh_bounds)
+		if has_bounds:
+			bounds = bounds.merge(body_bounds)
+		else:
+			bounds = body_bounds
+			has_bounds = true
+	if has_bounds and bounds.size.length_squared() > 0.001:
+		var local_transform := Transform3D(Basis.IDENTITY, bounds.get_center())
+		_create_box_outline_proxy(body, local_transform, bounds.size)
+
+
+func _transform_aabb(transform: Transform3D, aabb: AABB) -> AABB:
+	var result := AABB(transform * aabb.position, Vector3.ZERO)
+	for x in [0.0, 1.0]:
+		for y in [0.0, 1.0]:
+			for z in [0.0, 1.0]:
+				var corner := aabb.position + Vector3(aabb.size.x * x, aabb.size.y * y, aabb.size.z * z)
+				result = result.expand(transform * corner)
+	return result
+
+
+func _find_collision_shapes(root: Node) -> Array[CollisionShape3D]:
+	var collision_shapes: Array[CollisionShape3D] = []
+	if root is CollisionShape3D:
+		collision_shapes.append(root)
+	for child in root.get_children():
+		collision_shapes.append_array(_find_collision_shapes(child))
+	return collision_shapes
 
 
 func _find_meshes(root: Node) -> Array[MeshInstance3D]:

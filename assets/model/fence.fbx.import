@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c4dy0wlhtqsbm"
-path="res://.godot/imported/Wooden Bridge.fbx-b3f283bf85a5bf5cae91702e82b59844.scn"
+uid="uid://dinqsgwv21fgk"
+path="res://.godot/imported/fence.fbx-168368acc2116e3d8cc167f85289942d.scn"
 
 [deps]
 
-source_file="res://assets/model/bridge2/Wooden Bridge.fbx"
-dest_files=["res://.godot/imported/Wooden Bridge.fbx-b3f283bf85a5bf5cae91702e82b59844.scn"]
+source_file="res://assets/model/fence.fbx"
+dest_files=["res://.godot/imported/fence.fbx-168368acc2116e3d8cc167f85289942d.scn"]
 
 [params]
 

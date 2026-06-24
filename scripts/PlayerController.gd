@@ -26,7 +26,16 @@ extends CharacterBody3D
 
 # ──────────── 内部状态 ────────────
 
+const RUN_ANIMATION := &"run"
+const JUMP_ANIMATION := &"jump"
+const STOPPED_ANIMATION := &""
+const ANIMATION_MOVE_THRESHOLD := 0.01
+
+@onready var _animation_player: AnimationPlayer = $"Cartoon Character/AnimationPlayer"
+
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+var _current_animation: StringName = STOPPED_ANIMATION
 
 ## 是否在水中
 var _in_water: bool = false
@@ -74,6 +83,7 @@ func _physics_process(delta: float) -> void:
 		global_transform.basis = global_transform.basis.slerp(target_basis, rotation_speed * delta).orthonormalized()
 
 	move_and_slide()
+	_update_animation_state(has_land_input)
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━ 陆地移动 ━━━━━━━━━━━━━━━━━━━━━━
@@ -153,6 +163,43 @@ func _process_water_movement(delta: float) -> void:
 ## 获取玩家当前的朝向向量 (3D)
 func get_facing_direction() -> Vector3:
 	return -global_transform.basis.z.normalized()
+
+
+func _update_animation_state(has_land_input: bool) -> void:
+	if _animation_player == null:
+		return
+
+	if _in_water:
+		_stop_animation()
+		return
+
+	if not is_on_floor():
+		_play_animation(JUMP_ANIMATION)
+		return
+
+	var horizontal_speed_squared := Vector2(velocity.x, velocity.z).length_squared()
+	if has_land_input and horizontal_speed_squared > ANIMATION_MOVE_THRESHOLD:
+		_play_animation(RUN_ANIMATION)
+	else:
+		_stop_animation()
+
+
+func _play_animation(animation_name: StringName) -> void:
+	if _current_animation == animation_name:
+		return
+	if not _animation_player.has_animation(animation_name):
+		return
+
+	_animation_player.play(animation_name)
+	_current_animation = animation_name
+
+
+func _stop_animation() -> void:
+	if _current_animation == STOPPED_ANIMATION:
+		return
+
+	_animation_player.stop()
+	_current_animation = STOPPED_ANIMATION
 
 
 func _get_camera_relative_direction(input_dir: Vector2) -> Vector3:

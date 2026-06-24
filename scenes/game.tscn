@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://8q0hk43adaor" path="res://scenes/deadZone.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://dabn24tm6lcty" path="res://scenes/water.tscn" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://md28xq2rbbqa" path="res://scenes/body.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://md28xq2rbbqa" path="res://scenes/ladder.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://6kgvev3hlbfd" path="res://scenes/character_body_3d.tscn" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://crquoo1qh3cdu" path="res://scripts/Clearzone.gd" id="3_p57ef"]
 [ext_resource type="Script" uid="uid://didsxgcquj5uu" path="res://scripts/DebugTimeDisplay.gd" id="4_time_display"]
+[ext_resource type="PackedScene" uid="uid://bacx6iqogewyi" path="res://scenes/box.tscn" id="7_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://dgumg4e705ecf" path="res://scenes/bridge.tscn" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://b6w4f2mcamorb" path="res://scripts/FollowOrbitCamera.gd" id="8_follow_camera"]
 [ext_resource type="Script" uid="uid://dc5ty1gw82tbx" path="res://scripts/DamSwitchButton.gd" id="9_switch_button"]
@@ -41,9 +42,12 @@ size = Vector3(1, 1, 1.0498657)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lbhrr"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gee14"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_vtaks"]
 resource_local_to_scene = true
-size = Vector3(1, 1, 0.99905396)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_clear_trigger"]
+resource_local_to_scene = true
+size = Vector3(1, 0.366333, 0.99797606)
 
 [node name="Game" type="Node3D" unique_id=1373608376]
 
@@ -52,6 +56,7 @@ script = ExtResource("10_dam_controller")
 gate_path = NodePath("../Env/Node3D/DamGate")
 water_area_path = NodePath("../Env/Node3D/water")
 switch_button_path = NodePath("../Env/Node3D/SwitchPanel/Button")
+gate_raise_height = 1.6
 
 [node name="Env" type="Node3D" parent="." unique_id=528281167]
 
@@ -69,18 +74,17 @@ flow_speed = 6.0
 transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 1, 0.49827024, 0.50238216, 0)
 
 [node name="DamGate" type="AnimatableBody3D" parent="Env/Node3D" unique_id=1827764410]
-transform = Transform3D(-4.371139e-07, 0, 0.28, 0, 1.7819663, 0, -10, 0, -1.2239188e-08, -0.43931103, 0.8086046, -3.0540423)
+transform = Transform3D(-4.687528e-07, 0, 0.28, 0, 1.7819663, 0, -10.723813, 0, -1.2239188e-08, -9.8500185, 0.8086046, -2.90664)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/DamGate" unique_id=874224103]
 shape = SubResource("BoxShape3D_gate")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/DamGate" unique_id=1634701670]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5527137e-15, 0, -33.573788)
 material_override = SubResource("StandardMaterial3D_gate")
 mesh = SubResource("BoxMesh_gate")
 
 [node name="SwitchPanel" type="Node3D" parent="Env/Node3D" unique_id=2082934111]
-transform = Transform3D(-0.97156, 0, -0.23679367, 0, 1, 0, 0.23679367, 0, -0.97156, -8.226227, 3.6199994, 4.152913)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.9906654, 3.6199994, 4.1529126)
 
 [node name="Panel" type="StaticBody3D" parent="Env/Node3D/SwitchPanel" unique_id=1054044933]
 transform = Transform3D(1.15, 0, 0, 0, 1.35, 0, 0, 0, 0.18, 0, 0.35, 0)
@@ -123,17 +127,28 @@ shape = SubResource("BoxShape3D_lnu2h")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/floor" unique_id=1554672293]
 mesh = SubResource("BoxMesh_lbhrr")
 
-[node name="clearRange" type="Area3D" parent="Env/Node3D" unique_id=427217917]
+[node name="clearRange" type="Node3D" parent="Env/Node3D" unique_id=427217917]
 transform = Transform3D(20, 0, 0, 0, 1.6, 0, 0, 0, 10, 0, 2.5, -13.402)
+
+[node name="CollisionBody" type="StaticBody3D" parent="Env/Node3D/clearRange" unique_id=1279026354]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/clearRange/CollisionBody" unique_id=2100357288]
+shape = SubResource("BoxShape3D_vtaks")
+
+[node name="PlayerClearTrigger" type="Area3D" parent="Env/Node3D/clearRange" unique_id=982925899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.54)
 script = ExtResource("3_p57ef")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/clearRange" unique_id=2100357288]
-transform = Transform3D(1.0000001, 0, 0, 0, 0.9999802, 0, 0, 0, 1.0000001, -2.2351742e-08, 0, 0.005630672)
-shape = SubResource("BoxShape3D_gee14")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/clearRange/PlayerClearTrigger" unique_id=1743886657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4775033, -0.53770375)
+shape = SubResource("BoxShape3D_clear_trigger")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/clearRange" unique_id=210975470]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0.030511022, 0)
 mesh = SubResource("BoxMesh_lbhrr")
+
+[node name="Node3D" parent="Env/Node3D" unique_id=738989849 instance=ExtResource("7_kvpfn")]
+transform = Transform3D(-3.4795026e-08, -0.7960174, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.18827772, 3.8597264, 6.3858385)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=569548970]
 transform = Transform3D(1, 0, 0, 0, 0.9657132, 0.2596113, 0, -0.2596113, 0.9657132, 0, 0, 0)
@@ -167,5 +182,5 @@ target_offset = Vector3(0, 0, 0)
 [node name="Camera3D" type="Camera3D" parent="SpringArm" unique_id=416128151]
 transform = Transform3D(0.70710677, 0.5246561, -0.4740631, 0, 0.6704266, 0.7419758, 0.70710665, -0.5246562, 0.47406316, -3.2947388, 5.1567316, 3.2947397)
 
-[node name="Node3D6" parent="." unique_id=893467243 instance=ExtResource("2_yqjtg")]
-transform = Transform3D(1.7503395, 0, 0, 0, 0.089510754, 0, 0, 0, 1.8447834, 4.271904, 3.9520602, 8.001219)
+[node name="Node3D" parent="." unique_id=2084979202 instance=ExtResource("2_yqjtg")]
+transform = Transform3D(-8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0, 2, -2.339209, 3.6291633, 6.8130827)

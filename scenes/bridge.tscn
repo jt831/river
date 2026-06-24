@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dgumg4e705ecf"]
 
-[ext_resource type="PackedScene" uid="uid://wif0ki56pk0l" path="res://assets/model/bridge3/bridge.fbx" id="1_7ct4w"]
+[ext_resource type="PackedScene" uid="uid://wif0ki56pk0l" path="res://assets/model/bridge.fbx" id="1_7ct4w"]
 [ext_resource type="Script" uid="uid://b6g1utmhdeq52" path="res://scripts/BridgeDeckRuleArea.gd" id="2_im2sa"]
 [ext_resource type="Script" uid="uid://b004y11ei6y7w" path="res://scripts/BridgeSideRuleArea.gd" id="3_1q54l"]
-[ext_resource type="PackedScene" uid="uid://b8dc4lhlevg4a" path="res://assets/model/bridge3/part1.fbx" id="4_yibb0"]
+[ext_resource type="PackedScene" uid="uid://b8dc4lhlevg4a" path="res://assets/model/bridge_part.fbx" id="4_yibb0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ct4w"]
 size = Vector3(2.3188477, 0.1444931, 1.8203125)
@@ -115,7 +115,7 @@ size = Vector3(1.9720459, 1.298706, 0.036865234)
 
 [node name="Node3D" type="Node3D" unique_id=404829566]
 
-[node name="bridge" parent="." unique_id=2133960894 instance=ExtResource("1_7ct4w")]
+[node name="bridge" parent="." unique_id=646095563 instance=ExtResource("1_7ct4w")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="bridge" unique_id=497800792]
 
@@ -231,7 +231,7 @@ script = ExtResource("3_1q54l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.17777419)
 shape = SubResource("BoxShape3D_ea2tt")
 
-[node name="bridge2" parent="." unique_id=446191612 instance=ExtResource("1_7ct4w")]
+[node name="bridge2" parent="." unique_id=1987290733 instance=ExtResource("1_7ct4w")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.744312, 0, 0.07925511)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="bridge2" unique_id=257633312]
@@ -349,5 +349,5 @@ script = ExtResource("3_1q54l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31915283, -0.17779541, -0.085941315)
 shape = SubResource("BoxShape3D_j310b")
 
-[node name="part1" parent="." unique_id=695434243 instance=ExtResource("4_yibb0")]
+[node name="part1" parent="." unique_id=1144892947 instance=ExtResource("4_yibb0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0717591, -1.4013002, 0.8306091)

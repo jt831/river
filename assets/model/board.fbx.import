@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b8dc4lhlevg4a"
-path="res://.godot/imported/part1.fbx-06fea11e18c49d4fa5642a589584d08c.scn"
+uid="uid://cefl60sblyul6"
+path="res://.godot/imported/board.fbx-9c0173cb42a9323e5c3a74c699520ae7.scn"
 
 [deps]
 
-source_file="res://assets/model/bridge3/part1.fbx"
-dest_files=["res://.godot/imported/part1.fbx-06fea11e18c49d4fa5642a589584d08c.scn"]
+source_file="res://assets/model/board.fbx"
+dest_files=["res://.godot/imported/board.fbx-9c0173cb42a9323e5c3a74c699520ae7.scn"]
 
 [params]
 

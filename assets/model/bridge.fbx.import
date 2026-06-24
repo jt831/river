@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://wif0ki56pk0l"
-path="res://.godot/imported/bridge.fbx-9fbebd18505ef89f01c0474791469fba.scn"
+path="res://.godot/imported/bridge.fbx-a63815aac91c761d9586cd3febebc2fd.scn"
 
 [deps]
 
-source_file="res://assets/model/bridge3/bridge.fbx"
-dest_files=["res://.godot/imported/bridge.fbx-9fbebd18505ef89f01c0474791469fba.scn"]
+source_file="res://assets/model/bridge.fbx"
+dest_files=["res://.godot/imported/bridge.fbx-a63815aac91c761d9586cd3febebc2fd.scn"]
 
 [params]
 

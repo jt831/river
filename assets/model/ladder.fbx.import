@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://kuii280uiqwt"
-path="res://.godot/imported/bridge.glb-b6d01f1c7ccb9c43fe70801db52383d8.scn"
+uid="uid://kguvtxsxe5pg"
+path="res://.godot/imported/ladder.fbx-e36e3de72cc5ec54b49c5b3dab8ab979.scn"
 
 [deps]
 
-source_file="res://assets/model/bridge1/bridge.glb"
-dest_files=["res://.godot/imported/bridge.glb-b6d01f1c7ccb9c43fe70801db52383d8.scn"]
+source_file="res://assets/model/ladder.fbx"
+dest_files=["res://.godot/imported/ladder.fbx-e36e3de72cc5ec54b49c5b3dab8ab979.scn"]
 
 [params]
 
@@ -30,7 +30,7 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=false
+animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
@@ -38,5 +38,7 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=2
-gltf/embedded_image_handling=1
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1
+fbx/naming_version=2

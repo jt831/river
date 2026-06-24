@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://np44lqt52blg"
-path="res://.godot/imported/WoodTrimSheet_01_LP_DefaultMaterial_Metallic.1001.png-a28757350729ce5df58c227bc1a7b1d8.ctex"
+path="res://.godot/imported/WoodTrimSheet_01_LP_DefaultMaterial_Metallic.1001.png-e0a69a7d06d9c78a70756dbb875d8719.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/model/bridge3/WoodTrimSheet_01_LP_DefaultMaterial_Metallic.1001.png"
-dest_files=["res://.godot/imported/WoodTrimSheet_01_LP_DefaultMaterial_Metallic.1001.png-a28757350729ce5df58c227bc1a7b1d8.ctex"]
+source_file="res://assets/textures/WoodTrimSheet_01_LP_DefaultMaterial_Metallic.1001.png"
+dest_files=["res://.godot/imported/WoodTrimSheet_01_LP_DefaultMaterial_Metallic.1001.png-e0a69a7d06d9c78a70756dbb875d8719.ctex"]
 
 [params]
 
