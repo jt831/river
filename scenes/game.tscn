@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://8q0hk43adaor" path="res://scenes/deadZone.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://dabn24tm6lcty" path="res://scenes/water.tscn" id="1_uwrxv"]
-[ext_resource type="ArrayMesh" uid="uid://bg7cfl7yyyfkv" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_CliffTile_A.res" id="2_rysoc"]
+[ext_resource type="ArrayMesh" uid="uid://b4lx38t124ll0" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_CliffTile_A.res" id="2_rysoc"]
 [ext_resource type="PackedScene" uid="uid://md28xq2rbbqa" path="res://scenes/ladder.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://6kgvev3hlbfd" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://crquoo1qh3cdu" path="res://scripts/Clearzone.gd" id="3_p57ef"]
-[ext_resource type="ArrayMesh" uid="uid://cibpiffwrrr1n" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_GroundTile.res" id="3_ssvqc"]
+[ext_resource type="ArrayMesh" uid="uid://mcefj8rich5t" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_GroundTile.res" id="3_ssvqc"]
 [ext_resource type="Script" uid="uid://didsxgcquj5uu" path="res://scripts/DebugTimeDisplay.gd" id="4_time_display"]
 [ext_resource type="PackedScene" uid="uid://bacx6iqogewyi" path="res://scenes/box.tscn" id="7_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://dgumg4e705ecf" path="res://scenes/bridge.tscn" id="7_u5sy4"]
@@ -16,11 +16,22 @@
 [ext_resource type="Script" uid="uid://ddx5ae71ye44m" path="res://scripts/GateTopRuleArea.gd" id="11_gate_top_rule"]
 [ext_resource type="Script" uid="uid://dcn448ey1i0ig" path="res://scripts/RiverbedBeforeWaterChangeRuleArea.gd" id="12_riverbed_before_rule"]
 [ext_resource type="Script" uid="uid://37raecbtuu30" path="res://scripts/RiverbedAfterWaterChangeRuleArea.gd" id="13_riverbed_after_rule"]
-[ext_resource type="PackedScene" uid="uid://cw886pyt0uuti" path="res://scenes/map.tscn" id="15_ir15t"]
-[ext_resource type="ArrayMesh" uid="uid://c6u2d8u4lcbmu" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_RoadStraightTile.res" id="18_ssvqc"]
-[ext_resource type="ArrayMesh" uid="uid://ddcreuyik257w" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_RoadTurnTile.res" id="19_264po"]
+[ext_resource type="ArrayMesh" uid="uid://drhatlfg6itac" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_RoadStraightTile.res" id="18_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://y66b0y2vtaib" path="res://scenes/treeA.tscn" id="19_1kice"]
+[ext_resource type="ArrayMesh" uid="uid://cuguokt0urubj" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_RoadTurnTile.res" id="19_264po"]
+[ext_resource type="PackedScene" uid="uid://buutbm7ww2cw1" path="res://scenes/treeB.tscn" id="20_5newe"]
+[ext_resource type="PackedScene" uid="uid://bst18mee0vpch" path="res://scenes/treeC.tscn" id="21_37s47"]
+[ext_resource type="PackedScene" uid="uid://cawe3fy4cwhj" path="res://scenes/fence.tscn" id="22_37s47"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rysoc"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_camera_limit"]
+size = Vector3(11.304718, 11.708252, 15.416312)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_clear_trigger"]
+resource_local_to_scene = true
+size = Vector3(36.774414, 0.366333, 12.711777)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_264po"]
+size = Vector3(37.524902, 2.05896, 12.806152)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gate"]
 
@@ -32,22 +43,6 @@ albedo_color = Color(0.36, 0.38, 0.39, 1)
 roughness = 0.82
 
 [sub_resource type="BoxMesh" id="BoxMesh_gate"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_lnu2h"]
-resource_local_to_scene = true
-size = Vector3(1, 1, 1.0498657)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_riverbed_rule"]
-size = Vector3(1, 0.2, 1.0498657)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lbhrr"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vtaks"]
-resource_local_to_scene = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_clear_trigger"]
-resource_local_to_scene = true
-size = Vector3(1, 0.366333, 0.95062256)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_panel"]
 
@@ -65,255 +60,59 @@ roughness = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_button"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_bt5mj"]
+size = Vector3(37.524902, 2.05896, 12.806152)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1j6l"]
+size = Vector3(0.13061523, 2.05896, 12.918945)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_37s47"]
+size = Vector3(0.13061523, 2.05896, 23.179764)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_264po"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_riverbed_rule"]
+size = Vector3(1, 0.2, 1.0498657)
+
 [node name="Game" type="Node3D" unique_id=1373608376]
 
-[node name="DamGateController" type="Node" parent="." unique_id=471160484]
-script = ExtResource("10_dam_controller")
-gate_path = NodePath("../Env/Node3D/DamGate")
-water_area_path = NodePath("../Env/Node3D/water")
-switch_button_path = NodePath("../Node3D2/SwitchPanel/Button")
-gate_raise_height = 4.0
+[node name="CameraSystem" type="Node3D" parent="." unique_id=604820519]
 
-[node name="Env" type="Node3D" parent="." unique_id=528281167]
+[node name="SpringArm" type="Node3D" parent="CameraSystem" unique_id=1294227566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7739172, 3.6950235, 3.667235)
+script = ExtResource("8_follow_camera")
+target_path = NodePath("../../player")
+limit_shape_path = NodePath("../CameraLimitArea/CollisionShape3D")
+distance = 7.0
+yaw_degrees = 45.0
+pitch_degrees = 50.0
+target_offset = Vector3(0, 0, 0)
 
-[node name="StartLand" type="Node3D" parent="Env" unique_id=1664544211]
+[node name="Camera3D" type="Camera3D" parent="CameraSystem/SpringArm" unique_id=223590016]
+transform = Transform3D(0.7071067, -0.5416752, 0.45451942, 0, 0.6427875, 0.76604444, -0.7071067, -0.5416752, 0.45451942, 3.1816363, 5.3623114, 3.1816363)
+projection = 1
+size = 10.0
 
-[node name="Node3D2" type="Node3D" parent="Env/StartLand" unique_id=1818724681]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32.99764, 1.764101, 8.657597)
-
-[node name="TinymenBasicTilesGeoCliffTileA" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=629568680]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, -1.959)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1363305058]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, -1.9408509)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA2" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=717676150]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 1.8335449)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile2" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1721079303]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 1.8519332)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA3" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1077681161]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 5.5185103)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile3" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=771388975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 5.5366597)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA4" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1575066970]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 9.311055)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile4" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=74552527]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 9.329444)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA5" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=424964283]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 13.186213)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile5" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=700726827]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 13.204361)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA6" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1520950376]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 16.978758)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile6" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=862593766]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 16.997145)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA7" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=526802326]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 20.663723)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile7" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=909794964]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 20.681871)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA9" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1359276387]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 28.027822)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile9" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1329907325]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4343548, 2.01376, 28.04597)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA10" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1096138316]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 31.820366)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile10" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1239089280]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448193, 2.01376, 31.838757)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA11" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1454177500]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 35.505333)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile11" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1459041622]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4174223, 2.01376, 35.523483)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA12" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1578355547]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 39.29788)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile12" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1763547543]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4078355, 2.01376, 39.19187)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA13" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1136349093]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.999999, 2.014, 42.981236)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile13" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1324477946]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3948574, 2.01376, 42.762455)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA14" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=426737650]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 46.96558)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile14" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=498838533]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.605092, 2.01376, 46.983967)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA15" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1418501173]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 50.650543)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile15" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=51625315]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050916, 2.01376, 50.668694)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoCliffTileA16" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1125752416]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 54.443092)
-mesh = ExtResource("2_rysoc")
-
-[node name="TinymenBasicTilesGeoGroundTile16" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=200773204]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.605092, 2.01376, 54.46148)
-mesh = ExtResource("3_ssvqc")
-
-[node name="TinymenBasicTilesGeoRoadStraightTile" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1162028017]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.9827194, 2.01376, 24.323593)
-mesh = ExtResource("18_ssvqc")
-
-[node name="TinymenBasicTilesGeoRoadStraightTile2" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1240037206]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386238, 2.01376, 28.025728)
-mesh = ExtResource("18_ssvqc")
-
-[node name="TinymenBasicTilesGeoRoadStraightTile3" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1495759407]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386143, 2.01376, 31.658648)
-mesh = ExtResource("18_ssvqc")
-
-[node name="TinymenBasicTilesGeoRoadStraightTile4" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1109402493]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386143, 2.01376, 35.312534)
-mesh = ExtResource("18_ssvqc")
-
-[node name="TinymenBasicTilesGeoRoadStraightTile5" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=946215040]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386047, 2.01376, 38.945454)
-mesh = ExtResource("18_ssvqc")
-
-[node name="TinymenBasicTilesGeoRoadStraightTile6" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1893449628]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386047, 2.01376, 42.59996)
-mesh = ExtResource("18_ssvqc")
-
-[node name="TinymenBasicTilesGeoRoadTurnTile" type="MeshInstance3D" parent="Env/StartLand/Node3D2" unique_id=1561139754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25365543, 2.01376, 24.326042)
-mesh = ExtResource("19_264po")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Env/StartLand" unique_id=1103457874]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/StartLand/StaticBody3D" unique_id=1853594059]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.670045, 0)
-shape = SubResource("WorldBoundaryShape3D_rysoc")
-
-[node name="bridge" parent="Env" unique_id=404829566 instance=ExtResource("7_u5sy4")]
-transform = Transform3D(-5.2453657e-08, 0, -1.1999998, 0, 1.1999999, 0, 1.1999998, 0, -5.2453657e-08, 8.6275835, 4.384023, 0.068857074)
-
-[node name="Node3D" type="Node3D" parent="Env" unique_id=1607806515]
-transform = Transform3D(1.256254, 0, 0, 0, 1, 0, 0, 0, 1, 1.5360813, 0, 0)
-
-[node name="water" parent="Env/Node3D" unique_id=1954815929 instance=ExtResource("1_uwrxv")]
-transform = Transform3D(20.000002, 0, 0, 0, 2.9533982, 0, 0, 0, 11, 0, 0.2986709, -2.8541126)
-flow_speed = 6.0
-
-[node name="deadZone" parent="Env/Node3D/water" unique_id=1824553102 instance=ExtResource("1_iywne")]
-transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 1, 0.49827024, 0.50238216, 0)
-
-[node name="DamGate" type="AnimatableBody3D" parent="Env/Node3D" unique_id=1827764410]
-transform = Transform3D(-4.6875277e-07, 0, 0.52556133, 0, 3.1118302, 0, -10.723812, 0, -2.2973014e-08, -9.7407, 0.108156204, -2.90664)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/DamGate" unique_id=874224103]
-shape = SubResource("BoxShape3D_gate")
-
-[node name="GateTopRuleArea" type="Area3D" parent="Env/Node3D/DamGate" unique_id=1303562654]
+[node name="CameraLimitArea" type="Area3D" parent="CameraSystem" unique_id=1645346801]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 8)
+collision_layer = 0
+collision_mask = 0
+monitoring = false
 monitorable = false
-script = ExtResource("11_gate_top_rule")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/DamGate/GateTopRuleArea" unique_id=1411935012]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
-shape = SubResource("BoxShape3D_gate_top_rule")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/DamGate" unique_id=1634701670]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 5.684342e-14, 0, 0.99999994, 0, 0, 4.1688337)
-material_override = SubResource("StandardMaterial3D_gate")
-mesh = SubResource("BoxMesh_gate")
-
-[node name="floor" type="StaticBody3D" parent="Env/Node3D" unique_id=1882115813]
-transform = Transform3D(20, 0, 0, 0, 0.36369127, 0, 0, 0, 42.94028, 0, 1.5822554, -0.91261005)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/floor" unique_id=2017530446]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0, 0.025177002)
-shape = SubResource("BoxShape3D_lnu2h")
-
-[node name="RiverbedBeforeWaterChangeRuleArea" type="Area3D" parent="Env/Node3D/floor" unique_id=5587594]
-monitorable = false
-script = ExtResource("12_riverbed_before_rule")
-dam_controller_path = NodePath("../../../../DamGateController")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/floor/RiverbedBeforeWaterChangeRuleArea" unique_id=791552656]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0.6, 0.025177002)
-shape = SubResource("BoxShape3D_riverbed_rule")
-
-[node name="RiverbedAfterWaterChangeRuleArea" type="Area3D" parent="Env/Node3D/floor" unique_id=1473440665]
-monitorable = false
-script = ExtResource("13_riverbed_after_rule")
-dam_controller_path = NodePath("../../../../DamGateController")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/floor/RiverbedAfterWaterChangeRuleArea" unique_id=913549080]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0.6, 0.025177002)
-shape = SubResource("BoxShape3D_riverbed_rule")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/floor" unique_id=1554672293]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.2355115, 0)
-mesh = SubResource("BoxMesh_lbhrr")
-
-[node name="clearRange" type="Node3D" parent="Env/Node3D" unique_id=427217917]
-transform = Transform3D(20, 0, 0, 0, 1.6, 0, 0, 0, 10, 0, 2.5, -13.402)
-
-[node name="CollisionBody" type="StaticBody3D" parent="Env/Node3D/clearRange" unique_id=1279026354]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/clearRange/CollisionBody" unique_id=2100357288]
-shape = SubResource("BoxShape3D_vtaks")
-
-[node name="PlayerClearTrigger" type="Area3D" parent="Env/Node3D/clearRange" unique_id=982925899]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.54)
-script = ExtResource("3_p57ef")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/clearRange/PlayerClearTrigger" unique_id=1743886657]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4775033, -0.5194237)
-shape = SubResource("BoxShape3D_clear_trigger")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraSystem/CameraLimitArea" unique_id=593836121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6937103, 2.854126, -6.7362666)
+shape = SubResource("BoxShape3D_camera_limit")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=569548970]
 transform = Transform3D(1, 0, 0, 0, 0.9657132, 0.2596113, 0, -0.2596113, 0.9657132, 0, 0, 0)
+
+[node name="DamGateController" type="Node" parent="." unique_id=471160484]
+script = ExtResource("10_dam_controller")
+gate_path = NodePath("../Env/DamGate")
+water_area_path = NodePath("../Env/water")
+switch_button_path = NodePath("../Env/SwitchPanel/Button")
+gate_raise_height = 4.0
 
 [node name="DebugUI" type="CanvasLayer" parent="." unique_id=1458204946]
 
@@ -330,53 +129,565 @@ theme_override_font_sizes/font_size = 24
 text = "12:00 AM"
 script = ExtResource("4_time_display")
 
-[node name="SpringArm" type="Node3D" parent="." unique_id=1294227566]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7739172, 3.6950235, 5.5832872)
-script = ExtResource("8_follow_camera")
-target_path = NodePath("../Node3D2/player")
-distance = 7.0
-pitch_degrees = 45.0
-target_offset = Vector3(0, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="SpringArm" unique_id=223590016]
-transform = Transform3D(0.7071067, 0.5, -0.49999994, 0, 0.7071067, 0.7071068, 0.7071067, -0.5, 0.49999994, -3.5, 4.949748, 3.5)
-
-[node name="Node3D2" type="Node3D" parent="." unique_id=903608905]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9160523)
-
-[node name="box" parent="Node3D2" unique_id=738989849 instance=ExtResource("7_kvpfn")]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 3.2946844, 4.3885627, 3.6176853)
-
-[node name="ladder" parent="Node3D2" unique_id=2084979202 instance=ExtResource("2_yqjtg")]
-transform = Transform3D(-8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0, 2.3814018, 1.3669267, 3.8968515, 3.2668262)
-
-[node name="player" parent="Node3D2" unique_id=1412336941 instance=ExtResource("3_lnu2h")]
+[node name="player" parent="." unique_id=1412336941 instance=ExtResource("3_lnu2h")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.7739172, 3.6950235, 3.667235)
 external_velocity_damping = 1.0
 
-[node name="SwitchPanel" type="Node3D" parent="Node3D2" unique_id=2082934111]
-transform = Transform3D(-1.252, 0, -1.5054282e-07, 0, 1.5, 0, 1.8904674e-07, 0, -0.997, -2.7484381, 4.270045, 1.436418)
+[node name="Env" type="Node3D" parent="." unique_id=528281167]
 
-[node name="Panel" type="StaticBody3D" parent="Node3D2/SwitchPanel" unique_id=1054044933]
+[node name="items" type="Node3D" parent="Env" unique_id=903608905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9160523)
+
+[node name="box" parent="Env/items" unique_id=738989849 instance=ExtResource("7_kvpfn")]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 3.2946844, 4.3885627, 3.6176853)
+
+[node name="ladder" parent="Env/items" unique_id=2084979202 instance=ExtResource("2_yqjtg")]
+transform = Transform3D(-8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0, 2, 1.3669267, 3.8968515, 3.2668262)
+
+[node name="EndLand" type="Node3D" parent="Env" unique_id=427217917]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5360813, 2.5, -13.402)
+
+[node name="PlayerClearTrigger" type="Area3D" parent="Env/EndLand" unique_id=982925899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.54)
+script = ExtResource("3_p57ef")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/EndLand/PlayerClearTrigger" unique_id=1743886657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2011719, 1.193666, -1.8587103)
+shape = SubResource("BoxShape3D_clear_trigger")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Env/EndLand" unique_id=704501028]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.748848, -2.495991, 7.8147597)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/EndLand/StaticBody3D" unique_id=124271340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5070801, 2.7597628, 9.123422)
+shape = SubResource("BoxShape3D_264po")
+
+[node name="Meshes" type="Node3D" parent="Env/EndLand/StaticBody3D" unique_id=1995517252]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32.99764, 1.764101, 8.657597)
+
+[node name="TinymenBasicTilesGeoCliffTileA" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=803999646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1767254, 2.014, 24.308182)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoCliffTileA2" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1205408286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157232, 2.014, 28.100729)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile2" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1604828708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9106293, 2.01376, 28.119116)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA3" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1075006932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157204, 2.014, 31.785692)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile3" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1416903663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9106293, 2.01376, 31.803843)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA8" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=226731310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157242, 2.014, 35.390182)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile8" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=45595919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.910632, 2.01376, 35.408333)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA17" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1642787115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157242, 2.014, 39.18273)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile17" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1425298064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9106293, 2.01376, 39.20112)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA18" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1005270603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.350484, 2.014, 42.60401)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile18" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1506284890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.745393, 2.01376, 42.65564)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA4" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1014702483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1570063, 2.014, 16.79825)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile4" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=4496173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5519133, 2.01376, 16.81664)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA5" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=2054161920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1570063, 2.014, 20.532747)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile5" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1314499181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5519133, 2.01376, 20.550896)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA6" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1207020188]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 16.978758)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile6" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1409393504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 16.997145)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA7" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1452853581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 20.663723)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoCliffTileA20" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1364500203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.000001, 2.014, 24.35503)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile7" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1868614069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 20.681871)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA9" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=2101573934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 28.027822)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile9" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1941809762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4343548, 2.01376, 28.04597)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA10" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=2041871559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 31.820366)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile10" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=477821607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448193, 2.01376, 31.838757)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA11" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1857788401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 35.505333)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile11" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=568093314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4174223, 2.01376, 35.523483)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA12" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=125212482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 39.29788)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile12" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=2012774453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4078355, 2.01376, 39.19187)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA13" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1178475389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999986, 2.014, 42.71303)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile13" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1886465443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3948574, 2.01376, 42.762455)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile20" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1342058723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08395386, 2.01376, 42.762455)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile23" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1146526051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08395386, 2.01376, 39.090378)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile24" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=357098801]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08395386, 2.01376, 35.37965)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile25" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=573728677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08395386, 2.01376, 31.630264)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile26" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1007816142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.083952904, 2.01376, 27.996841)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile27" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=346491111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25504684, 2.01376, 24.208805)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile28" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=499596523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3236876, 2.01376, 24.208805)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile21" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1726280317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.083952904, 2.01376, 46.434532)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile22" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1565239932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08395195, 2.01376, 50.261227)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA14" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=669593480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999986, 2.014, 46.47723)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile14" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=319751006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3928795, 2.01376, 46.571526)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA15" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1486733838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999986, 2.014, 50.162193)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoCliffTileA19" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1469783702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.582508, 2.014, 50.162193)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile15" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1897812050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.392878, 2.01376, 50.256252)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile19" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1019532849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.629051, 2.01376, 50.256252)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA16" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=1587682201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.137457, 2.014, 46.408867)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile16" type="MeshInstance3D" parent="Env/EndLand/StaticBody3D/Meshes" unique_id=502616691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6149826, 2.01376, 46.489216)
+mesh = ExtResource("3_ssvqc")
+
+[node name="DamGate" type="AnimatableBody3D" parent="Env" unique_id=1827764410]
+transform = Transform3D(-5.888725e-07, 0, 0.6602385, 0, 3.1118302, 0, -10.723812, 0, -2.2973014e-08, -8.05197, 0.108156204, -2.90664)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/DamGate" unique_id=874224103]
+shape = SubResource("BoxShape3D_gate")
+
+[node name="GateTopRuleArea" type="Area3D" parent="Env/DamGate" unique_id=1303562654]
+monitorable = false
+script = ExtResource("11_gate_top_rule")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/DamGate/GateTopRuleArea" unique_id=1411935012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("BoxShape3D_gate_top_rule")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/DamGate" unique_id=1634701670]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 5.684342e-14, 0, 0.99999994, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_gate")
+mesh = SubResource("BoxMesh_gate")
+
+[node name="SwitchPanel" type="Node3D" parent="Env" unique_id=2082934111]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -2.7484381, 4.070045, 3.3524704)
+
+[node name="Panel" type="StaticBody3D" parent="Env/SwitchPanel" unique_id=1054044933]
 transform = Transform3D(1.15, 0, 0, 0, 1.5, 0, 0, 0, 0.18, 0, 0.3499999, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/SwitchPanel/Panel" unique_id=1960842245]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/SwitchPanel/Panel" unique_id=1960842245]
 shape = SubResource("BoxShape3D_panel")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/SwitchPanel/Panel" unique_id=943639276]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/SwitchPanel/Panel" unique_id=943639276]
 material_override = SubResource("StandardMaterial3D_panel")
 mesh = SubResource("BoxMesh_panel")
 
-[node name="Button" type="StaticBody3D" parent="Node3D2/SwitchPanel" unique_id=470616499]
+[node name="Button" type="StaticBody3D" parent="Env/SwitchPanel" unique_id=470616499]
 transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.16, 0, 0.35, -0.17)
 script = ExtResource("9_switch_button")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/SwitchPanel/Button" unique_id=97600375]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/SwitchPanel/Button" unique_id=97600375]
 shape = SubResource("BoxShape3D_button")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/SwitchPanel/Button" unique_id=1125717165]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/SwitchPanel/Button" unique_id=1125717165]
 material_override = SubResource("StandardMaterial3D_button")
 mesh = SubResource("BoxMesh_button")
 
-[node name="Map" parent="." unique_id=1747949787 instance=ExtResource("15_ir15t")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.750446, 1.3427916, -14.369741)
+[node name="water" parent="Env" unique_id=1954815929 instance=ExtResource("1_uwrxv")]
+transform = Transform3D(25.125082, 0, 0, 0, 1.9725617, 0, 0, 0, 11, 1.5360813, 1.7507254, -2.8541126)
+flow_speed = 6.0
+
+[node name="deadZone" parent="Env/water" unique_id=1824553102 instance=ExtResource("1_iywne")]
+transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 1, 0.49827024, 0.50238216, 0)
+
+[node name="bridge" parent="Env" unique_id=404829566 instance=ExtResource("7_u5sy4")]
+transform = Transform3D(-5.2453657e-08, 0, -1.1999998, 0, 1.1999999, 0, 1.1999998, 0, -5.2453657e-08, 8.6275835, 4.5954204, 0.068857074)
+
+[node name="StartLand" type="Node3D" parent="Env" unique_id=1664544211]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Env/StartLand" unique_id=1103457874]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/StartLand/StaticBody3D" unique_id=1853594059]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5070801, 2.7597628, 9.123422)
+shape = SubResource("BoxShape3D_bt5mj")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Env/StartLand/StaticBody3D" unique_id=453086657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.800825, 4.853812, 9.123422)
+shape = SubResource("BoxShape3D_e1j6l")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Env/StartLand/StaticBody3D" unique_id=667047541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.503645, 4.853812, 9.123422)
+shape = SubResource("BoxShape3D_e1j6l")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Env/StartLand/StaticBody3D" unique_id=1084106909]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.12040901, 4.853812, 15.482976)
+shape = SubResource("BoxShape3D_37s47")
+
+[node name="Meshes" type="Node3D" parent="Env/StartLand/StaticBody3D" unique_id=1818724681]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32.99764, 1.764101, 8.657597)
+
+[node name="TinymenBasicTilesGeoCliffTileA" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=629568680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157232, 2.014, 24.308182)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1363305058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.910631, 2.01376, 24.326332)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA2" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=717676150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157232, 2.014, 28.100729)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile2" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1721079303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9106293, 2.01376, 28.119116)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA3" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1077681161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157204, 2.014, 31.785692)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile3" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=771388975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9106293, 2.01376, 31.803843)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA8" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1421495386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157242, 2.014, 35.390182)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile8" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=2123947936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.910632, 2.01376, 35.408333)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA17" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1068686476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5157242, 2.014, 39.18273)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile17" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=2078208723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9106293, 2.01376, 39.20112)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA18" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1147777830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.350484, 2.014, 42.60401)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile18" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1416161541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.745393, 2.01376, 42.65564)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA4" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1575066970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1570063, 2.014, 16.79825)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile4" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=74552527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5519133, 2.01376, 16.81664)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA5" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=424964283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1570063, 2.014, 20.532747)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile5" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=700726827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5519133, 2.01376, 20.550896)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA6" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1520950376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 16.978758)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile6" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=862593766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 16.997145)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA7" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=526802326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.014, 20.663723)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile7" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=909794964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6050923, 2.01376, 20.681871)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA9" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1359276387]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 28.027822)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile9" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1329907325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4343548, 2.01376, 28.04597)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA10" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1096138316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 31.820366)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile10" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1239089280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448193, 2.01376, 31.838757)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA11" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1454177500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 35.505333)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile11" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1459041622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4174223, 2.01376, 35.523483)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA12" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1578355547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999995, 2.014, 39.29788)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile12" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1763547543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4078355, 2.01376, 39.19187)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA13" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1136349093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999986, 2.014, 42.71303)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile13" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1324477946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3948574, 2.01376, 42.762455)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA14" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=426737650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999986, 2.014, 46.47723)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile14" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=498838533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3928795, 2.01376, 46.571526)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA15" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1418501173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9999986, 2.014, 50.162193)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoCliffTileA19" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1515269111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.582508, 2.014, 50.162193)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile15" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=51625315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.392878, 2.01376, 50.256252)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoGroundTile19" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1013617768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.629051, 2.01376, 50.256252)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoCliffTileA16" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1125752416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.137457, 2.014, 46.408867)
+mesh = ExtResource("2_rysoc")
+
+[node name="TinymenBasicTilesGeoGroundTile16" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=200773204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6149826, 2.01376, 46.489216)
+mesh = ExtResource("3_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadStraightTile" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1162028017]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.9827194, 2.01376, 24.323593)
+mesh = ExtResource("18_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadStraightTile2" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1240037206]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386238, 2.01376, 28.025728)
+mesh = ExtResource("18_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadStraightTile3" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1495759407]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386143, 2.01376, 31.658648)
+mesh = ExtResource("18_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadStraightTile4" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1109402493]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386143, 2.01376, 35.312534)
+mesh = ExtResource("18_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadStraightTile5" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=946215040]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386047, 2.01376, 38.945454)
+mesh = ExtResource("18_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadStraightTile6" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1893449628]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25386047, 2.01376, 42.59996)
+mesh = ExtResource("18_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadStraightTile7" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1120152614]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25385952, 2.01376, 46.46369)
+mesh = ExtResource("18_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadStraightTile8" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1551677177]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.25385952, 2.01376, 50.1182)
+mesh = ExtResource("18_ssvqc")
+
+[node name="TinymenBasicTilesGeoRoadTurnTile" type="MeshInstance3D" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1561139754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25365543, 2.01376, 24.326042)
+mesh = ExtResource("19_264po")
+
+[node name="Tree1" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1284620072 instance=ExtResource("19_1kice")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.6277843, 2.0251417, 44.261646)
+
+[node name="Tree2" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=9923488 instance=ExtResource("20_5newe")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.4056597, 2.0251412, 45.540848)
+
+[node name="Tree10" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=2040680921 instance=ExtResource("20_5newe")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.119212, 2.0251412, 32.821793)
+
+[node name="Tree3" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=2041135063 instance=ExtResource("21_37s47")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.6950092, 2.0251417, 43.628708)
+
+[node name="Tree14" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1835309821 instance=ExtResource("21_37s47")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.2098894, 2.0251417, 26.427847)
+
+[node name="Tree4" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=288488806 instance=ExtResource("19_1kice")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.8443623, 2.0251412, 42.03403)
+
+[node name="Tree8" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=2142426968 instance=ExtResource("19_1kice")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.5874557, 2.0251412, 36.70818)
+
+[node name="Tree15" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1304091625 instance=ExtResource("19_1kice")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.789359, 2.0251403, 24.218323)
+
+[node name="Tree5" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=440605221 instance=ExtResource("20_5newe")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.025141, 2.0251417, 39.50347)
+
+[node name="Tree12" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1417178321 instance=ExtResource("20_5newe")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.7086334, 2.0251417, 28.919182)
+
+[node name="Tree13" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1225256535 instance=ExtResource("20_5newe")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.2323446, 2.0251417, 26.890993)
+
+[node name="Tree7" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=1218458084 instance=ExtResource("20_5newe")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.025141, 2.0251417, 37.534794)
+
+[node name="Tree6" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=553367916 instance=ExtResource("21_37s47")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.9171557, 2.0251422, 45.552834)
+
+[node name="Tree11" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=825889186 instance=ExtResource("21_37s47")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.9150143, 2.0251422, 30.75341)
+
+[node name="Tree9" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=721698793 instance=ExtResource("21_37s47")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.7330227, 2.0251422, 35.01438)
+
+[node name="Fence1" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=589968858 instance=ExtResource("22_37s47")]
+transform = Transform3D(-0.9515622, 0, -0.3074563, 0, 1, 0, 0.3074563, 0, -0.9515622, 0.59711075, 2.0419269, 44.88181)
+
+[node name="Fence2" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=342239337 instance=ExtResource("22_37s47")]
+transform = Transform3D(-0.91529745, 0, 0.40277863, 0, 1, 0, -0.40277863, 0, -0.91529745, -1.5553732, 2.0419269, 44.474598)
+
+[node name="floor" type="StaticBody3D" parent="Env" unique_id=1882115813]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/floor" unique_id=2017530446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.2351742e-08, 1.698781, 0.025177002)
+shape = SubResource("WorldBoundaryShape3D_264po")
+
+[node name="RiverbedBeforeWaterChangeRuleArea" type="Area3D" parent="Env/floor" unique_id=5587594]
+monitorable = false
+script = ExtResource("12_riverbed_before_rule")
+dam_controller_path = NodePath("../../../DamGateController")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/floor/RiverbedBeforeWaterChangeRuleArea" unique_id=791552656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0.6, 0.025177002)
+shape = SubResource("BoxShape3D_riverbed_rule")
+
+[node name="RiverbedAfterWaterChangeRuleArea" type="Area3D" parent="Env/floor" unique_id=1473440665]
+monitorable = false
+script = ExtResource("13_riverbed_after_rule")
+dam_controller_path = NodePath("../../../DamGateController")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/floor/RiverbedAfterWaterChangeRuleArea" unique_id=913549080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0.6, 0.025177002)
+shape = SubResource("BoxShape3D_riverbed_rule")

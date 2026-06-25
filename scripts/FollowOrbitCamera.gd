@@ -6,6 +6,15 @@ extends Node3D
 		target_path = value
 		_target = null
 
+@export var limit_enabled: bool = true
+
+@export var limit_shape_path: NodePath:
+	set(value):
+		limit_shape_path = value
+		_limit_shape = null
+
+@export var limit_y: bool = false
+
 @export var distance: float = 3.9:
 	set(value):
 		distance = maxf(value, 0.1)
@@ -31,6 +40,7 @@ extends Node3D
 @onready var _camera: Camera3D = $Camera3D
 
 var _target: Node3D
+var _limit_shape: CollisionShape3D
 var _has_focus_position := false
 
 
@@ -49,6 +59,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		_resolve_target()
+		_resolve_limit_shape()
 		_snap_to_target()
 		_update_camera_transform()
 
@@ -58,6 +69,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	_resolve_target()
+	_resolve_limit_shape()
 	if _target == null:
 		return
 
@@ -82,6 +94,16 @@ func _resolve_target() -> void:
 	_target = node as Node3D
 
 
+func _resolve_limit_shape() -> void:
+	if _limit_shape != null and is_instance_valid(_limit_shape):
+		return
+	if limit_shape_path.is_empty():
+		return
+
+	var node := get_node_or_null(limit_shape_path)
+	_limit_shape = node as CollisionShape3D
+
+
 func _snap_to_target() -> void:
 	if _target == null:
 		return
@@ -92,6 +114,33 @@ func _snap_to_target() -> void:
 
 func _get_target_position() -> Vector3:
 	return _target.global_position + target_offset
+
+
+func _clamp_camera_to_limit_shape(camera: Camera3D) -> void:
+	if not limit_enabled:
+		return
+
+	_resolve_limit_shape()
+	if _limit_shape == null:
+		return
+
+	var box_shape := _limit_shape.shape as BoxShape3D
+	if box_shape == null:
+		return
+
+	var camera_position := camera.global_position
+	var local_position := _limit_shape.global_transform.affine_inverse() * camera_position
+	var half_size := box_shape.size * 0.5
+	local_position.x = clampf(local_position.x, -half_size.x, half_size.x)
+	local_position.z = clampf(local_position.z, -half_size.z, half_size.z)
+	if limit_y:
+		local_position.y = clampf(local_position.y, -half_size.y, half_size.y)
+
+	var clamped_position := _limit_shape.global_transform * local_position
+	if not limit_y:
+		clamped_position.y = camera_position.y
+
+	global_position += clamped_position - camera_position
 
 
 func _update_camera_transform() -> void:
@@ -109,6 +158,7 @@ func _update_camera_transform() -> void:
 	)
 
 	camera.position = offset
+	_clamp_camera_to_limit_shape(camera)
 	if offset.length_squared() > 0.0001:
 		camera.look_at(global_position, Vector3.UP)
 

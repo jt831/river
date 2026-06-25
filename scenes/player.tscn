@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://6kgvev3hlbfd"]
 
 [ext_resource type="Script" uid="uid://cp1pm1aqgqjv3" path="res://scripts/PlayerController.gd" id="1_player"]
-[ext_resource type="PackedScene" uid="uid://c2v6fvm3l46bm" path="res://assets/model/Cartoon Character.fbx" id="2_cthcg"]
+[ext_resource type="PackedScene" uid="uid://c2v6fvm3l46bm" path="res://assets/model/fox.fbx" id="2_cthcg"]
 [ext_resource type="Script" uid="uid://dslj65s6bfk2e" path="res://scripts/GrabThrowController.gd" id="2_grabthrow"]
 [ext_resource type="Script" uid="uid://vhiedbrio7x5" path="res://scripts/PlayerPositionIndicator.gd" id="3_position_indicator"]
 [ext_resource type="Animation" uid="uid://cacamumtoqebi" path="res://assets/animations/jump.tres" id="3_xrsio"]

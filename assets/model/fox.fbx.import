@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c2v6fvm3l46bm"
-path="res://.godot/imported/Cartoon Character.fbx-3f3d178a7251a8b73304d2f1b9dbced6.scn"
+path="res://.godot/imported/fox.fbx-af3bbf1f4bdcad2b5e9afaefe16c58ec.scn"
 
 [deps]
 
-source_file="res://assets/model/Cartoon Character.fbx"
-dest_files=["res://.godot/imported/Cartoon Character.fbx-3f3d178a7251a8b73304d2f1b9dbced6.scn"]
+source_file="res://assets/model/fox.fbx"
+dest_files=["res://.godot/imported/fox.fbx-af3bbf1f4bdcad2b5e9afaefe16c58ec.scn"]
 
 [params]
 
