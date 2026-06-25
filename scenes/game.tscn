@@ -1,27 +1,28 @@
 [gd_scene format=3 uid="uid://dr70ua50kia1r"]
 
 [ext_resource type="PackedScene" uid="uid://8q0hk43adaor" path="res://scenes/deadZone.tscn" id="1_iywne"]
-[ext_resource type="PackedScene" uid="uid://dabn24tm6lcty" path="res://scenes/water.tscn" id="1_uwrxv"]
-[ext_resource type="ArrayMesh" uid="uid://b4lx38t124ll0" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_CliffTile_A.res" id="2_rysoc"]
+[ext_resource type="PackedScene" uid="uid://dabn24tm6lcty" path="res://scenes/env/water.tscn" id="1_uwrxv"]
+[ext_resource type="ArrayMesh" uid="uid://b4lx38t124ll0" path="res://assets/model/landscape/mesh/Tinymen - Basic Tiles_GEO_CliffTile_A.res" id="2_rysoc"]
 [ext_resource type="PackedScene" uid="uid://md28xq2rbbqa" path="res://scenes/ladder.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://6kgvev3hlbfd" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://crquoo1qh3cdu" path="res://scripts/Clearzone.gd" id="3_p57ef"]
-[ext_resource type="ArrayMesh" uid="uid://mcefj8rich5t" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_GroundTile.res" id="3_ssvqc"]
+[ext_resource type="ArrayMesh" uid="uid://mcefj8rich5t" path="res://assets/model/landscape/mesh/Tinymen - Basic Tiles_GEO_GroundTile.res" id="3_ssvqc"]
 [ext_resource type="Script" uid="uid://didsxgcquj5uu" path="res://scripts/DebugTimeDisplay.gd" id="4_time_display"]
-[ext_resource type="PackedScene" uid="uid://bacx6iqogewyi" path="res://scenes/box.tscn" id="7_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://dgumg4e705ecf" path="res://scenes/bridge.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://bacx6iqogewyi" path="res://scenes/rock.tscn" id="7_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://dgumg4e705ecf" path="res://scenes/env/bridge.tscn" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://b6w4f2mcamorb" path="res://scripts/FollowOrbitCamera.gd" id="8_follow_camera"]
 [ext_resource type="Script" uid="uid://dc5ty1gw82tbx" path="res://scripts/DamSwitchButton.gd" id="9_switch_button"]
 [ext_resource type="Script" uid="uid://crkbocuejtx03" path="res://scripts/DamGateController.gd" id="10_dam_controller"]
 [ext_resource type="Script" uid="uid://ddx5ae71ye44m" path="res://scripts/GateTopRuleArea.gd" id="11_gate_top_rule"]
 [ext_resource type="Script" uid="uid://dcn448ey1i0ig" path="res://scripts/RiverbedBeforeWaterChangeRuleArea.gd" id="12_riverbed_before_rule"]
 [ext_resource type="Script" uid="uid://37raecbtuu30" path="res://scripts/RiverbedAfterWaterChangeRuleArea.gd" id="13_riverbed_after_rule"]
-[ext_resource type="ArrayMesh" uid="uid://drhatlfg6itac" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_RoadStraightTile.res" id="18_ssvqc"]
-[ext_resource type="PackedScene" uid="uid://y66b0y2vtaib" path="res://scenes/treeA.tscn" id="19_1kice"]
-[ext_resource type="ArrayMesh" uid="uid://cuguokt0urubj" path="res://assets/model/env/mesh/Tinymen - Basic Tiles_GEO_RoadTurnTile.res" id="19_264po"]
-[ext_resource type="PackedScene" uid="uid://buutbm7ww2cw1" path="res://scenes/treeB.tscn" id="20_5newe"]
-[ext_resource type="PackedScene" uid="uid://bst18mee0vpch" path="res://scenes/treeC.tscn" id="21_37s47"]
-[ext_resource type="PackedScene" uid="uid://cawe3fy4cwhj" path="res://scenes/fence.tscn" id="22_37s47"]
+[ext_resource type="ArrayMesh" uid="uid://drhatlfg6itac" path="res://assets/model/landscape/mesh/Tinymen - Basic Tiles_GEO_RoadStraightTile.res" id="18_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://y66b0y2vtaib" path="res://scenes/env/treeA.tscn" id="19_1kice"]
+[ext_resource type="ArrayMesh" uid="uid://cuguokt0urubj" path="res://assets/model/landscape/mesh/Tinymen - Basic Tiles_GEO_RoadTurnTile.res" id="19_264po"]
+[ext_resource type="PackedScene" uid="uid://buutbm7ww2cw1" path="res://scenes/env/treeB.tscn" id="20_5newe"]
+[ext_resource type="PackedScene" uid="uid://bst18mee0vpch" path="res://scenes/env/treeC.tscn" id="21_37s47"]
+[ext_resource type="PackedScene" uid="uid://cawe3fy4cwhj" path="res://scenes/env/fence.tscn" id="22_37s47"]
+[ext_resource type="PackedScene" uid="uid://cumbi3pfg7r55" path="res://scenes/env/house.tscn" id="23_bt5mj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_camera_limit"]
 size = Vector3(11.304718, 11.708252, 15.416312)
@@ -30,8 +31,13 @@ size = Vector3(11.304718, 11.708252, 15.416312)
 resource_local_to_scene = true
 size = Vector3(36.774414, 0.366333, 12.711777)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_264po"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_pl11u"]
+size = Vector3(37.524902, 21.183502, 0.35351563)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bhx41"]
 size = Vector3(37.524902, 2.05896, 12.806152)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_bt5mj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gate"]
 
@@ -83,13 +89,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7739172, 3.6950235, 3.6672
 script = ExtResource("8_follow_camera")
 target_path = NodePath("../../player")
 limit_shape_path = NodePath("../CameraLimitArea/CollisionShape3D")
-distance = 7.0
+distance = 11.0
 yaw_degrees = 45.0
 pitch_degrees = 50.0
 target_offset = Vector3(0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraSystem/SpringArm" unique_id=223590016]
-transform = Transform3D(0.7071067, -0.5416752, 0.45451942, 0, 0.6427875, 0.76604444, -0.7071067, -0.5416752, 0.45451942, 3.1816363, 5.3623114, 3.1816363)
+transform = Transform3D(0.7071067, -0.5416752, 0.45451942, 0, 0.6427875, 0.76604444, -0.7071067, -0.5416752, 0.45451942, 4.9997144, 8.426489, 4.9997144)
 projection = 1
 size = 10.0
 
@@ -138,8 +144,8 @@ external_velocity_damping = 1.0
 [node name="items" type="Node3D" parent="Env" unique_id=903608905]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9160523)
 
-[node name="box" parent="Env/items" unique_id=738989849 instance=ExtResource("7_kvpfn")]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 3.2946844, 4.3885627, 3.6176853)
+[node name="rock1" parent="Env/items" unique_id=738989849 instance=ExtResource("7_kvpfn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2946844, 3.785478, 3.6176853)
 
 [node name="ladder" parent="Env/items" unique_id=2084979202 instance=ExtResource("2_yqjtg")]
 transform = Transform3D(-8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0, 2, 1.3669267, 3.8968515, 3.2668262)
@@ -159,8 +165,16 @@ shape = SubResource("BoxShape3D_clear_trigger")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.748848, -2.495991, 7.8147597)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Env/EndLand/StaticBody3D" unique_id=124271340]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5070801, 2.7597628, 9.123422)
-shape = SubResource("BoxShape3D_264po")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50708055, 14.566458, 11.399908)
+shape = SubResource("BoxShape3D_pl11u")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Env/EndLand/StaticBody3D" unique_id=892403650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50708014, 2.7597628, 9.123423)
+shape = SubResource("BoxShape3D_bhx41")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Env/EndLand/StaticBody3D" unique_id=1781444751]
+transform = Transform3D(1, 0, 0, 0, -0.99999994, 8.742277e-08, 0, -8.742277e-08, -0.99999994, -0.50707924, 13.079585, -2.0072904)
+shape = SubResource("WorldBoundaryShape3D_bt5mj")
 
 [node name="Meshes" type="Node3D" parent="Env/EndLand/StaticBody3D" unique_id=1995517252]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32.99764, 1.764101, 8.657597)
@@ -373,7 +387,7 @@ material_override = SubResource("StandardMaterial3D_gate")
 mesh = SubResource("BoxMesh_gate")
 
 [node name="SwitchPanel" type="Node3D" parent="Env" unique_id=2082934111]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -2.7484381, 4.070045, 3.3524704)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -2.7484381, 4.070045, 3.525381)
 
 [node name="Panel" type="StaticBody3D" parent="Env/SwitchPanel" unique_id=1054044933]
 transform = Transform3D(1.15, 0, 0, 0, 1.5, 0, 0, 0, 0.18, 0, 0.3499999, 0)
@@ -662,10 +676,10 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.91
 [node name="Tree9" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=721698793 instance=ExtResource("21_37s47")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.7330227, 2.0251422, 35.01438)
 
-[node name="Fence1" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=589968858 instance=ExtResource("22_37s47")]
+[node name="Fence1" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=337683996 instance=ExtResource("22_37s47")]
 transform = Transform3D(-0.9515622, 0, -0.3074563, 0, 1, 0, 0.3074563, 0, -0.9515622, 0.59711075, 2.0419269, 44.88181)
 
-[node name="Fence2" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=342239337 instance=ExtResource("22_37s47")]
+[node name="Fence2" parent="Env/StartLand/StaticBody3D/Meshes" unique_id=626506296 instance=ExtResource("22_37s47")]
 transform = Transform3D(-0.91529745, 0, 0.40277863, 0, 1, 0, -0.40277863, 0, -0.91529745, -1.5553732, 2.0419269, 44.474598)
 
 [node name="floor" type="StaticBody3D" parent="Env" unique_id=1882115813]
@@ -691,3 +705,6 @@ dam_controller_path = NodePath("../../../DamGateController")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Env/floor/RiverbedAfterWaterChangeRuleArea" unique_id=913549080]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0.6, 0.025177002)
 shape = SubResource("BoxShape3D_riverbed_rule")
+
+[node name="House" parent="." unique_id=1418161013 instance=ExtResource("23_bt5mj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4975867, 3.8884454, -15.374293)

@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://c3cbftcwinwit"]
 
-[ext_resource type="Texture2D" uid="uid://cagcuy2ovgng6" path="res://assets/textures/WoodTrimSheet_01_LP_DefaultMaterial_BaseColor.1001.png" id="1_xcxf1"]
-[ext_resource type="Texture2D" uid="uid://bl2n3mdapdcnj" path="res://assets/textures/WoodTrimSheet_01_LP_DefaultMaterial_Normal.1001.png" id="2_5h2sc"]
+[ext_resource type="Texture2D" uid="uid://cagcuy2ovgng6" path="res://assets/model/bridge/WoodTrimSheet_01_LP_DefaultMaterial_BaseColor.1001.png" id="1_xcxf1"]
+[ext_resource type="Texture2D" uid="uid://bl2n3mdapdcnj" path="res://assets/model/bridge/WoodTrimSheet_01_LP_DefaultMaterial_Normal.1001.png" id="2_5h2sc"]
 
 [resource]
 resource_name = "Wood"

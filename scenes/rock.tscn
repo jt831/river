@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bacx6iqogewyi"]
+
+[ext_resource type="Script" uid="uid://1a7gqsh481ak" path="res://scripts/WaterBody.gd" id="2_telwu"]
+[ext_resource type="Script" uid="uid://bdn86t3q157tf" path="res://scripts/Grabbable.gd" id="3_brpd5"]
+[ext_resource type="ArrayMesh" uid="uid://dfaugg7v8ps1y" path="res://assets/model/landscape/mesh/Tinymen - Basic Tiles_GEO_Rock_B.res" id="3_m58sn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ks2v0"]
+size = Vector3(1.1428223, 1, 1.5546875)
+
+[node name="Rock" type="Node3D" unique_id=738989849]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=914355949]
+mass = 100000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=86465373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013671875, 0.50376457, 0)
+shape = SubResource("BoxShape3D_ks2v0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1476458670]
+mesh = ExtResource("3_m58sn")
+
+[node name="WaterBody" type="Node" parent="RigidBody3D" unique_id=782381844]
+script = ExtResource("2_telwu")
+
+[node name="Grabbable" type="Node" parent="RigidBody3D" unique_id=-2072745074]
+script = ExtResource("3_brpd5")

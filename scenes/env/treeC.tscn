@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bst18mee0vpch"]
+
+[ext_resource type="ArrayMesh" uid="uid://b7lbp2dyafbgq" path="res://assets/model/landscape/mesh/Tinymen - Basic Tiles_GEO_PineTree_C.res" id="1_gk1dd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xuq4r"]
+size = Vector3(2.0546875, 3.0274658, 1.9511719)
+
+[node name="TreeC" type="Node3D" unique_id=1284620072]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1753577586]
+
+[node name="TinymenBasicTilesGeoPineTreeA" type="MeshInstance3D" parent="StaticBody3D" unique_id=1557729260]
+mesh = ExtResource("1_gk1dd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2090374386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00390625, 1.5098703, 0)
+shape = SubResource("BoxShape3D_xuq4r")

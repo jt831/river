@@ -36,8 +36,9 @@ ring_segments = 16
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1412336941 groups=["player"]]
 script = ExtResource("1_player")
 move_speed = 4.0
+rotation_speed = 24.0
 
-[node name="Cartoon Character" parent="." unique_id=1103130800 instance=ExtResource("2_cthcg")]
+[node name="Cartoon Character" parent="." unique_id=942499377 instance=ExtResource("2_cthcg")]
 transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cartoon Character" unique_id=509462987]
@@ -62,7 +63,7 @@ visible = false
 script = ExtResource("2_grabthrow")
 
 [node name="CarryPivot" type="Marker3D" parent="GrabThrowController" unique_id=1089757519]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -1.15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7592851, -1.9515121)
 
 [node name="TrajectoryLine" type="MeshInstance3D" parent="GrabThrowController" unique_id=1680899614]
 top_level = true
