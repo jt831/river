@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://8q0hk43adaor" path="res://scenes/deadZone.tscn" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://dabn24tm6lcty" path="res://scenes/water.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://md28xq2rbbqa" path="res://scenes/ladder.tscn" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://6kgvev3hlbfd" path="res://scenes/character_body_3d.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://6kgvev3hlbfd" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://crquoo1qh3cdu" path="res://scripts/Clearzone.gd" id="3_p57ef"]
 [ext_resource type="Script" uid="uid://didsxgcquj5uu" path="res://scripts/DebugTimeDisplay.gd" id="4_time_display"]
 [ext_resource type="PackedScene" uid="uid://bacx6iqogewyi" path="res://scenes/box.tscn" id="7_kvpfn"]
@@ -11,14 +11,36 @@
 [ext_resource type="Script" uid="uid://b6w4f2mcamorb" path="res://scripts/FollowOrbitCamera.gd" id="8_follow_camera"]
 [ext_resource type="Script" uid="uid://dc5ty1gw82tbx" path="res://scripts/DamSwitchButton.gd" id="9_switch_button"]
 [ext_resource type="Script" uid="uid://crkbocuejtx03" path="res://scripts/DamGateController.gd" id="10_dam_controller"]
+[ext_resource type="Script" uid="uid://ddx5ae71ye44m" path="res://scripts/GateTopRuleArea.gd" id="11_gate_top_rule"]
+[ext_resource type="Script" uid="uid://dcn448ey1i0ig" path="res://scripts/RiverbedBeforeWaterChangeRuleArea.gd" id="12_riverbed_before_rule"]
+[ext_resource type="Script" uid="uid://37raecbtuu30" path="res://scripts/RiverbedAfterWaterChangeRuleArea.gd" id="13_riverbed_after_rule"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gate"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gate_top_rule"]
+size = Vector3(1, 0.15, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gate"]
 albedo_color = Color(0.36, 0.38, 0.39, 1)
 roughness = 0.82
 
 [sub_resource type="BoxMesh" id="BoxMesh_gate"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lnu2h"]
+resource_local_to_scene = true
+size = Vector3(1, 1, 1.0498657)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lbhrr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_riverbed_rule"]
+size = Vector3(1, 0.2, 1.0498657)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vtaks"]
+resource_local_to_scene = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_clear_trigger"]
+resource_local_to_scene = true
+size = Vector3(1, 0.366333, 0.95062256)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_panel"]
 
@@ -36,26 +58,13 @@ roughness = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_button"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lnu2h"]
-resource_local_to_scene = true
-size = Vector3(1, 1, 1.0498657)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lbhrr"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vtaks"]
-resource_local_to_scene = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_clear_trigger"]
-resource_local_to_scene = true
-size = Vector3(1, 0.366333, 0.95062256)
-
 [node name="Game" type="Node3D" unique_id=1373608376]
 
 [node name="DamGateController" type="Node" parent="." unique_id=471160484]
 script = ExtResource("10_dam_controller")
 gate_path = NodePath("../Env/Node3D/DamGate")
 water_area_path = NodePath("../Env/Node3D/water")
-switch_button_path = NodePath("../Env/Node3D/SwitchPanel/Button")
+switch_button_path = NodePath("../Node3D2/SwitchPanel/Button")
 gate_raise_height = 1.6
 
 [node name="Env" type="Node3D" parent="." unique_id=528281167]
@@ -67,45 +76,29 @@ transform = Transform3D(-0.0038327235, 0, -1.1999937, 0, 1.1999999, 0, 1.1999937
 transform = Transform3D(1.256254, 0, 0, 0, 1, 0, 0, 0, 1, 1.5360813, 0, 0)
 
 [node name="water" parent="Env/Node3D" unique_id=1954815929 instance=ExtResource("1_uwrxv")]
-transform = Transform3D(20, 0, 0, 0, 1.6, 0, 0, 0, 11, 0, 1.7627277, -2.8541126)
+transform = Transform3D(20.000002, 0, 0, 0, 2.9533982, 0, 0, 0, 11, 0, 0.2986709, -2.8541126)
 flow_speed = 6.0
 
 [node name="deadZone" parent="Env/Node3D/water" unique_id=1824553102 instance=ExtResource("1_iywne")]
 transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 1, 0.49827024, 0.50238216, 0)
 
 [node name="DamGate" type="AnimatableBody3D" parent="Env/Node3D" unique_id=1827764410]
-transform = Transform3D(-4.6875277e-07, 0, 0.52556133, 0, 1.7819663, 0, -10.723812, 0, -2.2973014e-08, -9.740699, 0.8086046, -2.90664)
+transform = Transform3D(-4.6875277e-07, 0, 0.52556133, 0, 1.7819663, 0, -10.723812, 0, -2.2973014e-08, -9.7407, -0.614439, -2.90664)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/DamGate" unique_id=874224103]
 shape = SubResource("BoxShape3D_gate")
 
+[node name="GateTopRuleArea" type="Area3D" parent="Env/Node3D/DamGate" unique_id=1303562654]
+monitorable = false
+script = ExtResource("11_gate_top_rule")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/DamGate/GateTopRuleArea" unique_id=1411935012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("BoxShape3D_gate_top_rule")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/DamGate" unique_id=1634701670]
 material_override = SubResource("StandardMaterial3D_gate")
 mesh = SubResource("BoxMesh_gate")
-
-[node name="SwitchPanel" type="Node3D" parent="Env/Node3D" unique_id=2082934111]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.9906654, 3.776517, 4.1529126)
-
-[node name="Panel" type="StaticBody3D" parent="Env/Node3D/SwitchPanel" unique_id=1054044933]
-transform = Transform3D(1.15, 0, 0, 0, 1.5, 0, 0, 0, 0.18, 0, 0.3499999, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/SwitchPanel/Panel" unique_id=1960842245]
-shape = SubResource("BoxShape3D_panel")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/SwitchPanel/Panel" unique_id=943639276]
-material_override = SubResource("StandardMaterial3D_panel")
-mesh = SubResource("BoxMesh_panel")
-
-[node name="Button" type="StaticBody3D" parent="Env/Node3D/SwitchPanel" unique_id=470616499]
-transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.16, 0, 0.35, -0.17)
-script = ExtResource("9_switch_button")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/SwitchPanel/Button" unique_id=97600375]
-shape = SubResource("BoxShape3D_button")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/SwitchPanel/Button" unique_id=1125717165]
-material_override = SubResource("StandardMaterial3D_button")
-mesh = SubResource("BoxMesh_button")
 
 [node name="ground2" type="StaticBody3D" parent="Env/Node3D" unique_id=1112943919]
 transform = Transform3D(20, 0, 0, 0, 1.6, 0, 0, 0, 10, 0, 2.559727, 7.6616573)
@@ -124,7 +117,26 @@ transform = Transform3D(20, 0, 0, 0, 0.36369127, 0, 0, 0, 42.94028, 0, 1.5822554
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0, 0.025177002)
 shape = SubResource("BoxShape3D_lnu2h")
 
+[node name="RiverbedBeforeWaterChangeRuleArea" type="Area3D" parent="Env/Node3D/floor" unique_id=5587594]
+monitorable = false
+script = ExtResource("12_riverbed_before_rule")
+dam_controller_path = NodePath("../../../../DamGateController")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/floor/RiverbedBeforeWaterChangeRuleArea" unique_id=791552656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0.6, 0.025177002)
+shape = SubResource("BoxShape3D_riverbed_rule")
+
+[node name="RiverbedAfterWaterChangeRuleArea" type="Area3D" parent="Env/Node3D/floor" unique_id=1473440665]
+monitorable = false
+script = ExtResource("13_riverbed_after_rule")
+dam_controller_path = NodePath("../../../../DamGateController")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Node3D/floor/RiverbedAfterWaterChangeRuleArea" unique_id=913549080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0.6, 0.025177002)
+shape = SubResource("BoxShape3D_riverbed_rule")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Node3D/floor" unique_id=1554672293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.2355115, 0)
 mesh = SubResource("BoxMesh_lbhrr")
 
 [node name="clearRange" type="Node3D" parent="Env/Node3D" unique_id=427217917]
@@ -147,15 +159,8 @@ shape = SubResource("BoxShape3D_clear_trigger")
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0.030511022, 0)
 mesh = SubResource("BoxMesh_lbhrr")
 
-[node name="Node3D" parent="Env/Node3D" unique_id=738989849 instance=ExtResource("7_kvpfn")]
-transform = Transform3D(-3.4795026e-08, -0.7960174, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.18827772, 3.8597264, 6.3858385)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=569548970]
 transform = Transform3D(1, 0, 0, 0, 0.9657132, 0.2596113, 0, -0.2596113, 0.9657132, 0, 0, 0)
-
-[node name="player" parent="." unique_id=1412336941 instance=ExtResource("3_lnu2h")]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -7.274645, 4.4845533, 6.7913027)
-contact_impulse_scale = 5.0
 
 [node name="DebugUI" type="CanvasLayer" parent="." unique_id=1458204946]
 
@@ -173,15 +178,49 @@ text = "12:00 AM"
 script = ExtResource("4_time_display")
 
 [node name="SpringArm" type="Node3D" parent="." unique_id=1294227566]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.274645, 4.4845533, 6.7913027)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7057095, 3.6877446, 10.031206)
 script = ExtResource("8_follow_camera")
-target_path = NodePath("../player")
+target_path = NodePath("../Node3D2/player")
 distance = 6.95
-pitch_degrees = 47.900000000000006
 target_offset = Vector3(0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm" unique_id=416128151]
-transform = Transform3D(0.70710677, 0.5246561, -0.4740631, 0, 0.6704266, 0.7419758, 0.70710665, -0.5246562, 0.47406316, -3.2947388, 5.1567316, 3.2947397)
+transform = Transform3D(0.7071067, 0.4055797, -0.57922786, 0, 0.81915194, 0.5735763, 0.7071067, -0.4055797, 0.57922786, -4.025635, 3.9863563, 4.025635)
+size = 10.0
 
-[node name="Node3D" parent="." unique_id=2084979202 instance=ExtResource("2_yqjtg")]
-transform = Transform3D(-8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0, 2, -2.339209, 3.6291633, 6.8130827)
+[node name="Node3D2" type="Node3D" parent="." unique_id=903608905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9160523)
+
+[node name="box" parent="Node3D2" unique_id=738989849 instance=ExtResource("7_kvpfn")]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -7.4949102, 4.3885627, 6.0542083)
+
+[node name="ladder" parent="Node3D2" unique_id=2084979202 instance=ExtResource("2_yqjtg")]
+transform = Transform3D(-8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0, 2.3814018, -4.7579107, 6.200451, 3.2668262)
+
+[node name="player" parent="Node3D2" unique_id=1412336941 instance=ExtResource("3_lnu2h")]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -4.7057095, 3.6877446, 8.115154)
+external_velocity_damping = 1.0
+
+[node name="SwitchPanel" type="Node3D" parent="Node3D2" unique_id=2082934111]
+transform = Transform3D(-1.252, 0, -1.5054282e-07, 0, 1.5, 0, 1.8904674e-07, 0, -0.997, -4.733462, 3.9761047, 2.3656435)
+
+[node name="Panel" type="StaticBody3D" parent="Node3D2/SwitchPanel" unique_id=1054044933]
+transform = Transform3D(1.15, 0, 0, 0, 1.5, 0, 0, 0, 0.18, 0, 0.3499999, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/SwitchPanel/Panel" unique_id=1960842245]
+shape = SubResource("BoxShape3D_panel")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/SwitchPanel/Panel" unique_id=943639276]
+material_override = SubResource("StandardMaterial3D_panel")
+mesh = SubResource("BoxMesh_panel")
+
+[node name="Button" type="StaticBody3D" parent="Node3D2/SwitchPanel" unique_id=470616499]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.16, 0, 0.35, -0.17)
+script = ExtResource("9_switch_button")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/SwitchPanel/Button" unique_id=97600375]
+shape = SubResource("BoxShape3D_button")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/SwitchPanel/Button" unique_id=1125717165]
+material_override = SubResource("StandardMaterial3D_button")
+mesh = SubResource("BoxMesh_button")

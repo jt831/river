@@ -47,7 +47,7 @@
 
 陆地状态下，玩家按 WASD 以 `move_speed = 5.0` 移动，按空格以 `jump_velocity = 4.5` 起跳，离地时应用项目默认重力。没有输入时，水平速度保持原方向并快速衰减，角色停止继续追赶残余速度方向；移动输入期间，角色会按照当前水平速度以 `rotation_speed = 12.0` 平滑转向。
 
-角色模型的 `Cartoon Character/AnimationPlayer` 装载了 `run` 和 `jump` 动画。陆地移动且有水平速度时播放 `run`；跳跃或离地时播放 `jump`，并优先于移动动画；落地静止时停止当前动画。水中移动不播放 `run`，水中仍不响应跳跃动画。
+角色模型的 `Cartoon Character/AnimationPlayer` 装载了 `idle`、`run`、`jump` 和 `swim` 动画。陆地静止时播放 `idle`；陆地移动且有水平速度时播放 `run`；跳跃或离地时播放 `jump`，并优先于移动/静止动画；进入水中后始终播放 `swim`，水中仍不响应跳跃动画。
 
 水中状态由 `WaterArea` 调用 `enter_water()` / `exit_water()` 切换。水中行为为：
 
@@ -106,7 +106,7 @@ Game
 
 ## 当前实现注意事项
 
-- 这是机制验证原型，除左上角调试时间和玩家移动/跳跃动画触发外，尚无正式 UI、音频、关卡流程、存档或测试代码。
+- 这是机制验证原型，除左上角调试时间和玩家静止/移动/跳跃/游泳动画触发外，尚无正式 UI、音频、关卡流程、存档或测试代码。
 - 相机当前为固定视角；若后续调整相机朝向，玩家的陆地移动和水中可控方向会自动随相机旋转。
 - 玩家和刚体采用两套不同的浮力模型：玩家按深度调整速度，刚体按估算浸没比例施力。
 - 刚体浸没高度只检查其直接子节点中的第一个常见碰撞形状，不处理旋转后的精确体积或复杂/嵌套碰撞体。
@@ -133,7 +133,9 @@ Game
 - 不要手工维护 `.godot/`、`*.uid` 或 `*.import` 生成内容，除非任务明确要求。
 - 批量删除文件前必须先向用户确认。
 - 每次修改项目后一并更新本文件
+- 本文件和包含中文的项目文档使用 UTF-8 编码；如果在 PowerShell 中用默认 `Get-Content`、`Select-String` 或终端输出看到中文乱码，通常是控制台输出编码/读取编码不匹配，不代表文件内容损坏。读取中文文档时显式加 `-Encoding UTF8`。
 - 使用 `Godot_v4.6.2-stable_win64.exe --headless --path . --quit` 或 `--check-only` 做验证时，需要用提升权限运行；普通沙箱会阻止 Godot 写入 `user://logs` 等用户目录，可能出现 `Failed to open 'user://logs/...'` 后引擎崩溃。
+- 2026-06-24 曾出现过一次验证误判风险：运行 `Godot_v4.6.2-stable_win64.exe --headless --path D:\Projects_Folder\Godot\river --quit-after 1` 时，Godot 输出 `ERROR: Failed to open 'user://logs/godot....log'`，随后打印 `CrashHandlerException: Program crashed with signal 11` 和 C++ backtrace，但命令退出码仍为 `0`，且没有 GDScript parser/error 行。这类崩溃优先按 Godot 访问用户日志目录失败、编辑器/进程占用或沙箱权限问题处理，不要直接判定为场景或脚本语法错误。复查时先关闭正在运行的 Godot 编辑器/游戏进程，必要时用提升权限重新运行验证，并同时用 `rg`、`Select-String`、`Get-Content -Encoding UTF8` 检查新脚本引用、节点路径和场景文本结构。
 
 ## 玩家位置标记
 

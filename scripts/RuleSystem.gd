@@ -5,6 +5,9 @@ signal rules_changed
 const RULE_BRIDGE_PLAYER: StringName = &"bridge_player"
 const RULE_BRIDGE_OBJECT: StringName = &"bridge_object"
 const RULE_BRIDGE_SIDE: StringName = &"bridge_side"
+const RULE_GATE_PLAYER: StringName = &"gate_player"
+const RULE_RIVERBED_BEFORE_WATER_CHANGE: StringName = &"riverbed_before_water_change"
+const RULE_RIVERBED_AFTER_WATER_CHANGE: StringName = &"riverbed_after_water_change"
 
 const RESULT_CLEAR: StringName = &"clear"
 const RESULT_FAILURE: StringName = &"failure"
@@ -13,6 +16,9 @@ const RULE_TEXTS := {
 	RULE_BRIDGE_PLAYER: "玩家不能踩在桥上",
 	RULE_BRIDGE_OBJECT: "桥上不能放任何东西",
 	RULE_BRIDGE_SIDE: "桥的侧面不能接触任何东西（水体除外）",
+	RULE_GATE_PLAYER: "玩家不能踩上闸门",
+	RULE_RIVERBED_BEFORE_WATER_CHANGE: "放水前，玩家和物体不能碰到河底",
+	RULE_RIVERBED_AFTER_WATER_CHANGE: "放水后，玩家和物体不能碰到河底",
 }
 
 const DEFAULT_CLEAR_TEXT := "游戏成功"

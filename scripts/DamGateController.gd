@@ -37,6 +37,10 @@ func _on_switch_activated() -> void:
 		_water_area.drain(water_drain_duration)
 
 
+func has_water_level_changed() -> bool:
+	return _triggered
+
+
 func _raise_gate() -> void:
 	if _gate == null:
 		return

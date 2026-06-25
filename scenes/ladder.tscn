@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bdn86t3q157tf" path="res://scripts/Grabbable.gd" id="2_grabbable"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f5bqu"]
-size = Vector3(0.2541504, 0.5673828, 3.6677246)
+size = Vector3(0.2541504, 0.5673828, 3.7044678)
 
 [node name="Node3D" type="Node3D" unique_id=738989849]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -16,7 +16,7 @@ mass = 0.2
 [node name="ladder" parent="RigidBody3D" unique_id=1187336855 instance=ExtResource("1_ku54x")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=86465373]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013671875, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013671875, 0, -0.018371582)
 shape = SubResource("BoxShape3D_f5bqu")
 
 [node name="WaterBody" type="Node" parent="RigidBody3D" unique_id=782381844]

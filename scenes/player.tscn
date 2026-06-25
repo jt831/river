@@ -5,11 +5,13 @@
 [ext_resource type="Script" uid="uid://dslj65s6bfk2e" path="res://scripts/GrabThrowController.gd" id="2_grabthrow"]
 [ext_resource type="Script" uid="uid://vhiedbrio7x5" path="res://scripts/PlayerPositionIndicator.gd" id="3_position_indicator"]
 [ext_resource type="Animation" uid="uid://cacamumtoqebi" path="res://assets/animations/jump.tres" id="3_xrsio"]
-[ext_resource type="Animation" uid="uid://dbni1w3gweld7" path="res://assets/animations/run.tres" id="4_lxkhp"]
+[ext_resource type="Animation" uid="uid://c7y5n0ih5qrt5" path="res://assets/animations/run.tres" id="4_lxkhp"]
 [ext_resource type="Animation" uid="uid://bkro4hhl8nlww" path="res://assets/animations/swim.tres" id="5_lxkhp"]
+[ext_resource type="Animation" uid="uid://b31frefwffoe0" path="res://assets/animations/idle.tres" id="6_idle"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cthcg"]
 _data = {
+&"idle": ExtResource("6_idle"),
 &"jump": ExtResource("3_xrsio"),
 &"run": ExtResource("4_lxkhp"),
 &"swim": ExtResource("5_lxkhp")

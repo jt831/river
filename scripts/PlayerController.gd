@@ -29,12 +29,16 @@ extends CharacterBody3D
 @export var min_impulse_contact_speed: float = 1.0
 @export var max_external_speed: float = 18.0
 @export var external_velocity_damping: float = 4.5
+@export var release_tangent_velocity_scale: float = 1.0
+@export var contact_tangent_horizontal_score_weight: float = 1.5
 
 
 # ──────────── 内部状态 ────────────
 
 const RUN_ANIMATION := &"run"
 const JUMP_ANIMATION := &"jump"
+const IDLE_ANIMATION := &"idle"
+const SWIM_ANIMATION := &"swim"
 const STOPPED_ANIMATION := &""
 const ANIMATION_MOVE_THRESHOLD := 0.01
 
@@ -54,6 +58,9 @@ var _water_surface_y: float = 0.0
 var _water_area: Node = null
 var _external_velocity: Vector3 = Vector3.ZERO
 var _applied_external_velocity: Vector3 = Vector3.ZERO
+var _was_touching_rigid_body: bool = false
+var _cached_contact_tangent_velocity: Vector3 = Vector3.ZERO
+var _cached_contact_tangent_score: float = 0.0
 
 # ━━━━━━━━━━━━━━━━━━━━━━ 水体通知接口 ━━━━━━━━━━━━━━━━━━━━━━
 
@@ -202,39 +209,65 @@ func _damp_external_velocity(delta: float) -> void:
 
 
 func _transfer_contact_impulses() -> void:
+	var touching_rigid_body := false
 	for index in range(get_slide_collision_count()):
 		var collision := get_slide_collision(index)
 		var collider := collision.get_collider()
 		if collider is RigidBody3D:
-			var body := collider as RigidBody3D
-			var contact_point := collision.get_position()
-			var contact_offset := contact_point - body.global_position
-			var surface_velocity := body.linear_velocity + body.angular_velocity.cross(contact_offset)
-			if surface_velocity.length() < min_impulse_contact_speed:
-				continue
+			touching_rigid_body = true
+			_cache_rigid_body_tangent_velocity(collision, collider as RigidBody3D)
+			continue
 
-			var safe_player_mass := maxf(player_physics_mass, 0.001)
-			var mass_influence := clampf(body.mass / safe_player_mass, 0.0, 1.0)
-			_inherit_external_velocity(surface_velocity * mass_influence * contact_impulse_scale)
-		else:
-			var collider_velocity := collision.get_collider_velocity()
-			if collider_velocity.length() < min_impulse_contact_speed:
-				continue
-			_inherit_external_velocity(collider_velocity * contact_impulse_scale)
+		var normal := collision.get_normal()
+		if normal.length_squared() <= 0.0001:
+			continue
+
+		var collider_velocity := collision.get_collider_velocity()
+		var contact_speed := collider_velocity.dot(normal)
+		if contact_speed < min_impulse_contact_speed:
+			continue
+
+		apply_physics_impulse(normal * contact_speed, 1.0)
+
+	if _was_touching_rigid_body and not touching_rigid_body:
+		_release_cached_contact_tangent_velocity()
+
+	if not touching_rigid_body:
+		_clear_cached_contact_tangent_velocity()
+
+	_was_touching_rigid_body = touching_rigid_body
 
 
-func _inherit_external_velocity(target_velocity: Vector3) -> void:
-	if target_velocity.length_squared() <= 0.0001:
+func _cache_rigid_body_tangent_velocity(collision: KinematicCollision3D, body: RigidBody3D) -> void:
+	var normal := collision.get_normal()
+	if normal.length_squared() <= 0.0001:
 		return
 
-	var target_direction := target_velocity.normalized()
-	var current_speed := _external_velocity.dot(target_direction)
-	var target_speed := target_velocity.length()
-	if current_speed >= target_speed:
+	var contact_point := collision.get_position()
+	var contact_offset := contact_point - body.global_position
+	var tangent_velocity := body.linear_velocity + body.angular_velocity.cross(contact_offset)
+	if tangent_velocity.length() < min_impulse_contact_speed:
 		return
 
-	_external_velocity += target_direction * (target_speed - current_speed)
-	_clamp_external_velocity()
+	var horizontal_speed := Vector2(tangent_velocity.x, tangent_velocity.z).length()
+	var score := tangent_velocity.length() + horizontal_speed * contact_tangent_horizontal_score_weight
+	if score <= _cached_contact_tangent_score:
+		return
+
+	_cached_contact_tangent_velocity = tangent_velocity * release_tangent_velocity_scale
+	_cached_contact_tangent_score = score
+
+
+func _release_cached_contact_tangent_velocity() -> void:
+	if _cached_contact_tangent_velocity.length() < min_impulse_contact_speed:
+		return
+
+	_add_external_velocity(_cached_contact_tangent_velocity)
+
+
+func _clear_cached_contact_tangent_velocity() -> void:
+	_cached_contact_tangent_velocity = Vector3.ZERO
+	_cached_contact_tangent_score = 0.0
 
 
 func _add_external_velocity(delta_velocity: Vector3) -> void:
@@ -259,7 +292,7 @@ func _update_animation_state(has_land_input: bool) -> void:
 		return
 
 	if _in_water:
-		_stop_animation()
+		_play_animation(SWIM_ANIMATION)
 		return
 
 	if not is_on_floor():
@@ -270,7 +303,7 @@ func _update_animation_state(has_land_input: bool) -> void:
 	if has_land_input and horizontal_speed_squared > ANIMATION_MOVE_THRESHOLD:
 		_play_animation(RUN_ANIMATION)
 	else:
-		_stop_animation()
+		_play_animation(IDLE_ANIMATION)
 
 
 func _play_animation(animation_name: StringName) -> void:
