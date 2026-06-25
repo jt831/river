@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ogs82ifkvgyr"]
+
+[ext_resource type="Texture2D" uid="uid://b6gjdx88invtq" path="res://assets/model/env/Tinymen - Basic Tiles_Overall-Palette_512.png" id="1_oip5w"]
+
+[resource]
+resource_name = "MAT_Base"
+cull_mode = 2
+albedo_texture = ExtResource("1_oip5w")
+roughness = 0.8
